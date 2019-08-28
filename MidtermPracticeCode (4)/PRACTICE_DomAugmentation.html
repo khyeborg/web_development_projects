@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>DOM Augmentation</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+      #one {
+        min-height: 135px;
+        border: 1px solid black;
+      }
+      #two {
+        min-height: 135px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>DOM Augmentation</h1>
+
+    <button id="button1">Button 1</button>
+    <button id="button2">Button 2</button>
+
+    <div id="one">
+    </div>
+
+    <div id="two">
+    </div>
+
+
+  </body>
+
+
+
+
+
+
+  <script type="text/javascript">
+    document.getElementById('button1').onclick = function(event) {
+      var newImage = document.createElement('img');
+      var one = document.getElementById('one');
+      if (one.children.length % 2 == 0) {
+        newImage.src = 'images/pikachu.png';
+      }
+      else {
+        newImage.src = 'images/squirtle.png';
+      }
+      one.appendChild( newImage );
+    }
+
+    document.getElementById('button2').onclick = function(event) {
+      document.getElementById('two').appendChild( document.getElementById('one').firstElementChild );
+    }
+
+  </script>
+</html>

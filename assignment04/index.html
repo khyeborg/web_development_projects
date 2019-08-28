@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Assigment 04</title>
+		<meta charset="utf-8"/>
+
+		<style>
+
+			#main {
+				margin: auto;
+				position: relative;
+				background-image: url("images/ninetales.jpeg");
+				line-height: 1.5;
+				text-align: center;
+				padding-top: 10px;
+				text-shadow: 2px 2px white;
+			}
+
+			#title {
+				font-size: 45px;
+				margin: 0px;
+				padding-top: 15px;
+				padding-bottom: 15px;
+			}
+
+			#adopt {
+				position: relative;
+				top: 60px;
+				line-height: 1.5;
+				background-color: white;
+				text-align: left;
+				padding-top: 10px;
+			}
+
+			#checkout {
+				position: relative;
+				top: 60px;
+				line-height: 1.5;
+				background-color: white;
+				min-height: 1000px;
+				text-align: left;
+				padding-top: 25px;
+			}
+
+			#checkout p {
+				padding-left: 110px;
+				font-family: Helvetica;
+			}
+
+			.hidden {
+				display: none;
+			}
+
+			.buttons {
+				font-family: helvetica;
+				font-size: 18px;
+				padding: 10px 24px;
+				border: none;
+				border-radius: 8px;
+			}
+
+			.button_pressed {
+				background-color: orange;
+			}
+
+			img {
+				float: left;
+				padding-right: 30px;
+			}
+
+			h2 {
+				font-family: helvetica;
+				font-size: 30px;
+			}
+
+			#charmander, #cyndaquil, #squirtle {
+				clear: both;
+				padding-left: 160px;
+				padding-right: 160px;
+				padding-top: 25px;
+				padding-bottom: 25px;
+				font-family: helvetica;
+				font-size: 18px;
+			}
+
+			#charmander_num, #charmander_button, #cyndaquil_num, #cyndaquil_button, #squirtle_num, #squirtle_button {
+				float: left;
+			}
+
+			#cart_charmander_div, #cart_cyndaquil_div, #cart_squirtle_div {
+				float: left;
+				padding-left: 25px;
+				font-size: 15px;
+			}
+
+			#footer {
+				top: 100px;
+				position: relative;
+				background-color: black;
+				color: white;
+				text-align: center;
+				font-family: helvetica;
+				padding-top: 8px;
+				padding-bottom: 10px;
+			}
+
+			ul {
+				position: relative;
+				line-height: 1.5;
+				font-family: helvetica;
+				padding-left: 130px;
+			}
+
+			#charmander_list, #cyndaquil_list, #squirtle_list {
+				clear: both;
+			}
+
+			#total_charmander, #charmander_form, #remove_charmander, #remove_charmander_button, #total_cyndaquil, #cyndaquil_form, #remove_cyndaquil, #remove_cyndaquil_button, #total_squirtle, #squirtle_form, #remove_squirtle, #remove_squirtle_button {
+				float: left;
+			}
+
+			#total_charmander, #total_cyndaquil, #total_squirtle {
+				padding-right: 10px;
+			}
+
+			#remove_charmander_div, #remove_cyndaquil_div, #remove_squirtle_div {
+				float: left;
+				padding-left: 25px;
+				font-size: 15px;
+			}
+
+			input:focus {
+				outline:none;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="main">
+			<h1 id="title">Pokemon Adoption Center</h1>
+			<button class="buttons button_pressed" id="adopt_button">Adopt Pokemon</button>
+			<button class="buttons" id="checkout_button">Checkout</button>
+
+			<div id="adopt">
+				<div id="charmander">
+					<img src="images/charmander.png">
+					<h2>Charmander</h2>
+					<p>Charmander is a loveable little fire lizard. They tend to enjoy spicy foods such as cayenne peppers. We have many Charmanders that need a good home at the low, low price of $10 per Pokemon!</p>
+				
+					<form>
+						<select id="charmander_num">
+							<option value="zero" selected>How many Charmanders to adopt?</option>
+							<option value="one">1</option>
+							<option value="two">2</option>
+							<option value="three">3</option>
+							<option value="four">4</option>
+							<option value="five">5</option>
+						</select>
+						<button id="charmander_button">Add to cart</button>
+						<div id="cart_charmander_div"><span id="cart_charmander"></span></div>
+					</form>
+				</div>
+
+				<div id="cyndaquil">
+					<img src="images/cyndaquil.png">
+					<h2>Cyndaquil</h2>
+					<p>Cyndaquil is a feisty firey anteater. They like to play outside and then nap most of the day. We have many Cyndaquils that need a good home at the low, low price of $15 per Pokemon!</p>
+				
+					<form>
+						<select id="cyndaquil_num">
+							<option value="zero" selected>How many Cyndaquils to adopt?</option>
+							<option value="one">1</option>
+							<option value="two">2</option>
+							<option value="three">3</option>
+							<option value="four">4</option>
+							<option value="five">5</option>
+						</select>
+						<button id="cyndaquil_button">Add to cart</button>
+					</form>
+					<div id="cart_cyndaquil_div"><span id="cart_cyndaquil"></span></div>
+				</div>
+
+				<div id="squirtle">
+					<img src="images/squirtle.png">
+					<h2>Squirtle</h2>
+					<p>Squirtle is a slippery water turtle. They like to play in the bathtub and cause trouble around the house. We have many Squirtles that need a good home at the low, low price of $12 per Pokemon!</p>
+					
+					<form>
+						<select id="squirtle_num">
+							<option value="zero" selected>How many Squirtles to adopt?</option>
+							<option value="one">1</option>
+							<option value="two">2</option>
+							<option value="three">3</option>
+							<option value="four">4</option>
+							<option value="five">5</option>
+						</select>
+						<button id="squirtle_button">Add to cart</button>
+					</form>
+					<div id="cart_squirtle_div"><span id="cart_squirtle"></span></div>
+				</div>
+			</div>
+
+			<div class="hidden" id="checkout">
+				<p>Total cost: $<span id="total_cost"></span></p>
+				<p><span id="total_pokemon"></span></p>
+				<ul>
+					<li class="hidden" id="charmander_list">
+						<span id="total_charmander"></span>
+						<form id="charmander_form">
+							<select id="remove_charmander">
+								<option value="zero" selected>How many Charmanders to remove?</option>
+								<option value="one">1</option>
+								<option value="two">2</option>
+								<option value="three">3</option>
+								<option value="four">4</option>
+								<option value="five">5</option>
+							</select>
+							<button id="remove_charmander_button">Remove</button>
+						</form>
+						<div id="remove_charmander_div"><span id="remove_charmander_message"></span></div>
+					</li>
+
+					<li class="hidden" id="cyndaquil_list">
+						<span id="total_cyndaquil"></span>
+						<form id="cyndaquil_form">
+							<select id="remove_cyndaquil">
+								<option value="zero" selected>How many Cyndaquils to remove?</option>
+								<option value="one">1</option>
+								<option value="two">2</option>
+								<option value="three">3</option>
+								<option value="four">4</option>
+								<option value="five">5</option>
+							</select>
+							<button id="remove_cyndaquil_button">Remove</button>
+						</form>
+						<div id="remove_cyndaquil_div"><span id="remove_cyndaquil_message"></span></div>
+					</li>
+
+					<li class="hidden" id="squirtle_list">
+						<span id="total_squirtle"></span>
+						<form id="squirtle_form">
+							<select id="remove_squirtle">
+								<option value="zero" selected>How many Squirtles to remove?</option>
+								<option value="one">1</option>
+								<option value="two">2</option>
+								<option value="three">3</option>
+								<option value="four">4</option>
+								<option value="five">5</option>
+							</select>
+							<button id="remove_squirtle_button">Remove</button>
+						</form>
+						<div id="remove_squirtle_div"><span id="remove_squirtle_message"></span></div>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+
+		<script>
+
+			// get references
+			var adoptButton = document.getElementById("adopt_button");
+			var checkoutButton = document.getElementById("checkout_button");
+			var adoptDiv = document.getElementById("adopt");
+			var checkoutDiv = document.getElementById("checkout");
+			var charmanderButton = document.getElementById("charmander_button");
+			var cyndaquilButton = document.getElementById("cyndaquil_button");
+			var squirtleButton = document.getElementById("squirtle_button");
+			var totalCostUpdate = document.getElementById("total_cost");
+			var totalPokemonUpdate = document.getElementById("total_pokemon");
+			var cartCharmander = document.getElementById("cart_charmander");
+			var cartCyndaquil = document.getElementById("cart_cyndaquil");
+			var cartSquirtle = document.getElementById("cart_squirtle");
+			var totalCharmander = document.getElementById("total_charmander");
+			var totalCyndaquil = document.getElementById("total_cyndaquil");
+			var totalSquirtle = document.getElementById("total_squirtle");
+			var charmanderList = document.getElementById("charmander_list");
+			var cyndaquilList = document.getElementById("cyndaquil_list");
+			var squirtleList = document.getElementById("squirtle_list");
+			var removeCharmander = document.getElementById("remove_charmander");
+			var removeCyndaqui = document.getElementById("remove_cyndaquil");
+			var removesquirtl = document.getElementById("remove_squirtle");
+			var removeCharmanderButton = document.getElementById("remove_charmander_button");
+			var removeCyndaquilButton = document.getElementById("remove_cyndaquil_button");
+			var removeSquirtleButton = document.getElementById("remove_squirtle_button");
+			var removeCharmanderMessage = document.getElementById("remove_charmander_message");
+			var removeCyndaquilMessage = document.getElementById("remove_cyndaquil_message");
+			var removeSquirtleMessage = document.getElementById("remove_squirtle_message");
+
+			var totalCost = 0;
+			var totalCharmanderNum = 0;
+			var totalCyndaquilNum = 0;
+			var totalSquirtleNum = 0;
+			var charmanderTempCost = 0;
+			var cyndaquilTempCost = 0;
+			var squirtleTempCost = 0;
+			var charmanderCost = 10;
+			var cyndaquilCost = 15;
+			var squirtleCost = 12;
+			var charmanderTempNum = 0;
+			var cyndaquilTempNum = 0;
+			var squirtleTempNum = 0;
+			var charmanderName = "Charmander";
+			var cyndaquilName = "Cyndaquil";
+			var squirtleName = "Squirtle";
+			var removeCharmanderNum = 0;
+			var removeCyndaquilNum = 0;
+			var removeSquirtleNum = 0;
+
+			// if click on adopt button
+			adoptButton.onclick = function(event) {
+				if (adoptButton.classList.contains("button_pressed") != true) {
+					adoptButton.classList.add("button_pressed");
+					checkoutButton.classList.remove("button_pressed");
+					checkoutDiv.classList.add("hidden");
+					adoptDiv.classList.remove("hidden");
+					updateRemovePokemonMessage();
+				}
+			}
+
+			// if click on checkout button
+			checkoutButton.onclick = function(event) {
+				if (checkoutButton.classList.contains("button_pressed") != true) {
+					checkoutButton.classList.add("button_pressed");
+					adoptButton.classList.remove("button_pressed");
+					adoptDiv.classList.add("hidden");
+					checkoutDiv.classList.remove("hidden");
+
+					// reset form
+					var formArray = document.querySelectorAll('form');
+					for (var i = 0; i < formArray.length; i++) {
+						formArray[i].reset();
+					}
+
+					updateTotalCost();
+					updateTotalPokemon();
+					updateCartInnerHTML();
+				}
+			}
+
+			// if click on charmander button 
+			charmanderButton.onclick = function(event) {
+				event.preventDefault();
+				var amount = document.getElementById("charmander_num").value;
+				if (charmanderTempNum > 0) {charmanderName = "Charmanders";}
+				if (amount === "zero")       {cartCharmander.innerHTML = "Please select a valid number of Charmanders to adopt";}
+				else if (amount === "one")   {totalCharmanderNum += 1; charmanderTempNum += 1; cartCharmander.innerHTML = charmanderTempNum +  " " + charmanderName + " added to cart";  charmanderTempCost += 1 * charmanderCost;}
+				else if (amount === "two")   {totalCharmanderNum += 2; charmanderTempNum += 2; cartCharmander.innerHTML = charmanderTempNum + " Charmanders added to cart";              charmanderTempCost += 2 * charmanderCost;}
+				else if (amount === "three") {totalCharmanderNum += 3; charmanderTempNum += 3; cartCharmander.innerHTML = charmanderTempNum + " Charmanders added to cart";              charmanderTempCost += 3 * charmanderCost;}
+				else if (amount === "four")  {totalCharmanderNum += 4; charmanderTempNum += 4; cartCharmander.innerHTML = charmanderTempNum + " Charmanders added to cart";              charmanderTempCost += 4 * charmanderCost;}
+				else if (amount === "five")  {totalCharmanderNum += 5; charmanderTempNum += 5; cartCharmander.innerHTML = charmanderTempNum + " Charmanders added to cart";              charmanderTempCost += 5 * charmanderCost;}
+			
+				if (charmanderTempNum > 0) {charmanderList.classList.remove("hidden");}
+				else {charmanderList.classList.add("hidden");}
+			}
+
+			// if click on cyndaquil button 
+			cyndaquilButton.onclick = function(event) {
+				event.preventDefault();
+				var amount = document.getElementById("cyndaquil_num").value;
+				if (cyndaquilTempNum > 0) {cyndaquilName = "Cyndaquils";}
+				if (amount === "zero")       {cartCyndaquil.innerHTML = "Please select a valid number of Cyndaquils to adopt";}
+				else if (amount === "one")   {totalCyndaquilNum += 1; cyndaquilTempNum += 1; cartCyndaquil.innerHTML = cyndaquilTempNum +  " " + cyndaquilName + " added to cart";  cyndaquilTempCost += 1 * cyndaquilCost;}
+				else if (amount === "two")   {totalCyndaquilNum += 2; cyndaquilTempNum += 2; cartCyndaquil.innerHTML = cyndaquilTempNum + " Cyndaquils added to cart";              cyndaquilTempCost += 2 * cyndaquilCost;}
+				else if (amount === "three") {totalCyndaquilNum += 3; cyndaquilTempNum += 3; cartCyndaquil.innerHTML = cyndaquilTempNum + " Cyndaquils added to cart";              cyndaquilTempCost += 3 * cyndaquilCost;}
+				else if (amount === "four")  {totalCyndaquilNum += 4; cyndaquilTempNum += 4; cartCyndaquil.innerHTML = cyndaquilTempNum + " Cyndaquils added to cart";              cyndaquilTempCost += 4 * cyndaquilCost;}
+				else if (amount === "five")  {totalCyndaquilNum += 5; cyndaquilTempNum += 5; cartCyndaquil.innerHTML = cyndaquilTempNum + " Cyndaquils added to cart";              cyndaquilTempCost += 5 * cyndaquilCost;}
+			
+				if (cyndaquilTempNum > 0) {cyndaquilList.classList.remove("hidden");}
+				else {cyndaquilList.classList.add("hidden");}
+			}
+
+			// if click on squirtle button 
+			squirtleButton.onclick = function(event) {
+				event.preventDefault();
+				var amount = document.getElementById("squirtle_num").value;
+				if (squirtleTempNum > 0) {squirtleName = "Squirtles";}
+				if (amount === "zero")       {cartSquirtle.innerHTML = "Please select a valid number of Squirtles to adopt";}
+				else if (amount === "one")   {totalSquirtleNum += 1; squirtleTempNum += 1; cartSquirtle.innerHTML = squirtleTempNum +  " " + squirtleName + " added to cart";  squirtleTempCost += 1 * squirtleCost;}
+				else if (amount === "two")   {totalSquirtleNum += 2; squirtleTempNum += 2; cartSquirtle.innerHTML = squirtleTempNum + " Squirtles added to cart";              squirtleTempCost += 2 * squirtleCost;}
+				else if (amount === "three") {totalSquirtleNum += 3; squirtleTempNum += 3; cartSquirtle.innerHTML = squirtleTempNum + " Squirtles added to cart";              squirtleTempCost += 3 * squirtleCost;}
+				else if (amount === "four")  {totalSquirtleNum += 4; squirtleTempNum += 4; cartSquirtle.innerHTML = squirtleTempNum + " Squirtles added to cart";              squirtleTempCost += 4 * squirtleCost;}
+				else if (amount === "five")  {totalSquirtleNum += 5; squirtleTempNum += 5; cartSquirtle.innerHTML = squirtleTempNum + " Squirtles added to cart";              squirtleTempCost += 5 * squirtleCost;}
+				
+				if (squirtleTempNum > 0) {squirtleList.classList.remove("hidden");}
+				else {squirtleList.classList.add("hidden");}
+			}
+
+			// if click on charmander remove button 
+			removeCharmanderButton.onclick = function(event) {
+				event.preventDefault();
+				var removeAmount = document.getElementById("remove_charmander").value;
+				if (removeAmount === "zero")       {removeCharmanderNum = 0; removeCharmanderMessage.innerHTML = "Please select a valid number of Charmanders to remove from cart";}
+				else if (removeAmount === "one")   {removeCharmanderNum = 1;}
+				else if (removeAmount === "two")   {removeCharmanderNum = 2;}
+				else if (removeAmount === "three") {removeCharmanderNum = 3;}
+				else if (removeAmount === "four")  {removeCharmanderNum = 4;}
+				else if (removeAmount === "five")  {removeCharmanderNum = 5;}
+
+				if (removeCharmanderNum < totalCharmanderNum && removeCharmanderNum != 0) {
+					totalCharmanderNum -= removeCharmanderNum;
+					charmanderTempCost -= removeCharmanderNum * charmanderCost;
+					if (removeCharmanderNum == 1) {removeCharmanderMessage.innerHTML = removeCharmanderNum + " Charmander removed from cart";}
+					else {removeCharmanderMessage.innerHTML = removeCharmanderNum + " Charmanders removed from cart";}
+					removeCharmanderNum = 0;
+					updateTotalCost();
+					updateTotalPokemon();
+				}
+
+				else if (removeCharmanderNum === totalCharmanderNum) {
+					totalCharmanderNum -= removeCharmanderNum;
+					charmanderTempCost -= removeCharmanderNum * charmanderCost;
+					removeCharmanderNum = 0;
+					charmanderList.classList.add("hidden");
+					updateTotalCost();
+					updateTotalPokemon();
+				}
+			
+				else if (removeCharmanderNum > totalCharmanderNum) {
+					removeCharmanderMessage.innerHTML = "Removing " + removeCharmanderNum + " Charmanders will bring the number of Charmanders below zero";
+				}
+			}
+
+			// if click on cyndaquil remove button 
+			removeCyndaquilButton.onclick = function(event) {
+				event.preventDefault();
+				var removeAmount = document.getElementById("remove_cyndaquil").value;
+				if (removeAmount === "zero")       {removeCyndaquilNum = 0; removeCyndaquilMessage.innerHTML = "Please select a valid number of Cyndaquils to remove from cart";}
+				else if (removeAmount === "one")   {removeCyndaquilNum = 1;}
+				else if (removeAmount === "two")   {removeCyndaquilNum = 2;}
+				else if (removeAmount === "three") {removeCyndaquilNum = 3;}
+				else if (removeAmount === "four")  {removeCyndaquilNum = 4;}
+				else if (removeAmount === "five")  {removeCyndaquilNum = 5;}
+
+				if (removeCyndaquilNum < totalCyndaquilNum && removeCyndaquilNum != 0) {
+					totalCyndaquilNum -= removeCyndaquilNum;
+					cyndaquilTempCost -= removeCyndaquilNum * cyndaquilCost;
+					if (removeCyndaquilNum == 1) {removeCyndaquilMessage.innerHTML = removeCyndaquilNum + " Cyndaquil removed from cart";}
+					else {removeCyndaquilMessage.innerHTML = removeCyndaquilNum + " Cyndaquils removed from cart";}
+					removeCyndaquilNum = 0;
+					updateTotalCost();
+					updateTotalPokemon();
+				}
+
+				else if (removeCyndaquilNum === totalCyndaquilNum) {
+					totalCyndaquilNum -= removeCyndaquilNum;
+					cyndaquilTempCost -= removeCyndaquilNum * cyndaquilCost;
+					removeCyndaquilNum = 0;
+					cyndaquilList.classList.add("hidden");
+					updateTotalCost();
+					updateTotalPokemon();
+				}
+			
+				else if (removeCyndaquilNum > totalCyndaquilNum) {
+					removeCyndaquilMessage.innerHTML = "Removing " + removeCyndaquilNum + " Cyndaquils will bring the number of Cyndaquils below zero";
+				}
+			}
+
+			// if click on squirtle remove button 
+			removeSquirtleButton.onclick = function(event) {
+				event.preventDefault();
+				var removeAmount = document.getElementById("remove_squirtle").value;
+				if (removeAmount === "zero")       {removeSquirtleNum = 0; removeSquirtleMessage.innerHTML = "Please select a valid number of Squirtles to remove from cart";}
+				else if (removeAmount === "one")   {removeSquirtleNum = 1;}
+				else if (removeAmount === "two")   {removeSquirtleNum = 2;}
+				else if (removeAmount === "three") {removeSquirtleNum = 3;}
+				else if (removeAmount === "four")  {removeSquirtleNum = 4;}
+				else if (removeAmount === "five")  {removeSquirtleNum = 5;}
+
+				if (removeSquirtleNum < totalSquirtleNum && removeSquirtleNum != 0) {
+					totalSquirtleNum -= removeSquirtleNum;
+					squirtleTempCost -= removeSquirtleNum * squirtleCost;
+					if (removeSquirtleNum == 1) {removeSquirtleMessage.innerHTML = removeSquirtleNum + " Squirtle removed from cart";}
+					else {removeSquirtleMessage.innerHTML = removeSquirtleNum + " Squirtles removed from cart";}
+					removeSquirtleNum = 0;
+					updateTotalCost();
+					updateTotalPokemon();
+				}
+
+				else if (removeSquirtleNum === totalSquirtleNum) {
+					totalSquirtleNum -= removeSquirtleNum;
+					squirtleTempCost -= removeSquirtleNum * squirtleCost;
+					removeSquirtleNum = 0;
+					squirtleList.classList.add("hidden");
+					updateTotalCost();
+					updateTotalPokemon();
+				}
+			
+				else if (removeSquirtleNum > totalSquirtleNum) {
+					removeSquirtleMessage.innerHTML = "Removing " + removeSquirtleNum + " Squirtles will bring the number of Squirtles below zero";
+				}
+			}
+
+			function updateTotalCost() {
+				totalCost = charmanderTempCost + cyndaquilTempCost + squirtleTempCost;
+				totalCostUpdate.innerHTML = totalCost;
+			}
+
+			function updateTotalPokemon() {
+				if (totalCost === 0) {
+					totalPokemonUpdate.innerHTML = "There are no items in your cart.";
+					totalCharmander.innerHTML = "";
+					totalCyndaquil.innerHTML = "";
+					totalSquirtle.innerHTML = "";
+				}
+				else {
+					totalPokemonUpdate.innerHTML = "";
+					if (charmanderTempCost != 0) {
+						totalCharmander.innerHTML = "Charmander: " + charmanderTempCost / charmanderCost + " @ $10 per Pokemon";
+					}
+					else {
+						totalCharmander.innerHTML = "";
+					}
+					if (cyndaquilTempCost != 0) {
+						totalCyndaquil.innerHTML = "Cyndaquil: " + cyndaquilTempCost / cyndaquilCost + " @ $15 per Pokemon";
+					}
+					else {
+						totalCyndaquil.innerHTML = "";
+					}
+					if (squirtleTempCost != 0) {
+						totalSquirtle.innerHTML = "Squirtle: " + squirtleTempCost / squirtleCost + " @ $12 per Pokemon";
+					}
+					else {
+						totalSquirtle.innerHTML = "";
+					}
+				}
+			}
+
+			function updateCartInnerHTML() {
+				cartCharmander.innerHTML = "";
+				cartCyndaquil.innerHTML = "";
+				cartSquirtle.innerHTML = "";
+				charmanderTempNum = 0;
+				cyndaquilTempNum = 0;
+				squirtleTempNum = 0;
+			}
+
+			function updateRemovePokemonMessage() {
+				removeCharmanderMessage.innerHTML = "";
+				removeCyndaquilMessage.innerHTML = "";
+				removeSquirtleMessage.innerHTML = "";
+			}
+
+		</script>
+
+		<div id="footer">© 2019 Pokemon Adoption Center LLC.</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

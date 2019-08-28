@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYU Web Development</title>
+  </head>
+  <body>
+    <h1>NYU Web Development</h1>
+
+    <button id="btn">Click Me!</button>
+    <div id="results"></div>
+
+    <script type="text/javascript">
+
+      document.getElementById('btn').addEventListener('click', function(event) {
+
+        // create a new empty AJAX object
+        var xmlhttp = new XMLHttpRequest();
+
+        // have the object listen for when its state changes
+        xmlhttp.onreadystatechange = function() {
+
+          // this will print through 4 states
+          // 0: request not initialized
+          // 1: server connection established
+          // 2: request received
+          // 3: processing request
+          // 4: request finished and response is ready
+
+          // status values:
+          // 200: "OK"
+          // 403: "Forbidden"
+          // 404: "File not found"
+          // 500: "Internal Server Error" (PHP issue)
+          console.log("Ready State:" + this.readyState);
+          console.log("Status: " + this.status);
+          console.log("Response Text: " + this.responseText);
+
+          // readyState 4 is the final success state
+          if (this.readyState === 4 && this.status === 200) {
+            console.log("All done with: ", this.responseText);
+          }
+
+          console.log("------");
+        }
+
+        // ask the object to connect to datasource.php using POST
+        xmlhttp.open("POST", "datasource2.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        // start up the connection and send our POST data
+        xmlhttp.send("name=bulbasaur&type=grass");
+
+      });
+
+    </script>
+  </body>
+</html>

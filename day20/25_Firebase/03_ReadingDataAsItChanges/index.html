@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Development</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <h1>Reading Data as it Changes</h1>
+
+    <div id="result"></div>
+
+
+    <!-- note: this code is supplied by Firebase - you can obtain your own code to paste here
+         by doing the following:
+
+         1. Visit https://firebase.google.com/ and click 'Get Started'
+         2. Sign in using your Google Account
+         3. Click 'Add a Project'
+         4. Give your project a name and click 'create'
+         5. Click 'Add Firebase to your web app'
+         6. Give your app a name and click Save - copy the code that appears
+    -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+
+    <script>
+      // PASTE YOUR FIREBASE CONFIG HERE!
+      // YOU CAN GET THIS BY DOING THE FOLLOWING:
+      // 1. Log into your Firebase console
+      // 2. Click on the gear icon next to "project overview" and select "project settings"
+      // 3. Scroll down and find the script tag - copy the 'firebaseConfig' variable and paste it below:
+      var firebaseConfig = {
+        apiKey: "",
+        authDomain: "",
+        databaseURL: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: ""
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Initialize Database
+      var db = firebase.firestore();
+
+    </script>
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!-- custom code goes here -->
+    <script>
+
+      $(document).ready(function() {
+
+        // some DOM references
+        result = document.getElementById('result');
+
+        // listen for updates every time a new record appears in the 'people' collection
+        db.collection("people").onSnapshot(function(snapshot) {
+
+          // we can also sort our results in JavaScript using a comparision function
+          // step 1: extract results into a new array
+          var resultArray = [];
+          for (var i = 0; i < snapshot.docs.length; i++) {
+            resultArray.push(snapshot.docs[i].data());
+          }
+
+          // step 2: write a standard comparision function to order results
+          function compare( a, b ) {
+            if ( a.lastName < b.lastName ){
+              return -1;
+            }
+            else if ( a.lastName > b.lastName ){
+              return 1;
+            }
+            else {
+
+              if (a.firstName < b.firstName) {
+                return -1;
+              }
+              else if (a.firstName > b.firstName) {
+                return 1;
+              }
+              else {
+                return 0;
+              }
+
+            }
+          }
+
+          // step 3: use the 'sort' method and a reference to our curstom comparision function
+          resultArray.sort( compare );
+
+          // clear the result div
+          while (result.children.length > 0) {
+            result.removeChild( result.children[0] );
+          }
+
+          // visit every document that was returned
+          for (var i = 0; i < resultArray.length; i++) {
+
+            console.log(resultArray[i]);
+
+            // create a new 'p' tag to show off this data
+            var temp = document.createElement('p');
+            temp.innerHTML = resultArray[i].lastName + ', ' + resultArray[i].firstName;
+            result.appendChild(temp);
+          }
+        });
+
+      }); // end jQuery ready function
+
+
+
+    </script>
+
+  </body>
+</html>

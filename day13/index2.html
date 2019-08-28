@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Day 16</title>
+		<meta charset="utf-8">
+
+		<style>
+			.hidden {
+				display: none;
+			}
+			
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<h1>Day 16</h1>
+
+		<div id="heads"></div>
+		<div id="tails"></div>
+		<div id="coinholder"></div>
+		<button id="flip">Flip!</button>
+
+		<script>
+
+			// when the page loads, we need to remind it of the previous values of heads and tails 
+			console.log(document.cookie);
+
+			// make an object to hold all cookies 
+			var allCookies = {};
+
+			// aplit the cookie string into name/value pairs 
+			var split1 = document.cookie.split("; ");
+
+			for (var i = 0; i < split1.length; i++) {
+				// cut apart the split value on the '=' sign
+				var split2 = split1[i].split("=");
+				allCookies[split2[0]] = split2[1]
+			}
+			// console.log(split1[0]);
+			// console.log(split1[1]);
+
+			console.log(allCookies)
+
+			var heads = 0;
+			var tails = 0;
+
+			if (allCookies['heads'] !== undefined) {
+				heads = parseInt(allCookies['heads']);
+				tails = parseInt(allCookies['tails']);
+			}
+
+			document.getElementById('heads').innerHTML = "Heads: " + heads;
+			document.getElementById('tails').innerHTML = "Tails: " + tails;
+			
+			document.querySelector("#flip").addEventListener("click", function(event) {
+
+				// select a random number 0 - 1
+				var chance = parseInt(Math.random() * 2);
+
+				// generate an image to match
+				var coin = document.createElement("img");
+				if (chance === 1) {
+					coin.src = "images/heads.jpg";
+					heads += 1;
+				}
+				else {
+					coin.src = "images/tails.jpg";
+					tails += 1;
+				}
+
+				document.getElementById('heads').innerHTML = "Heads: " + heads;
+				document.getElementById('tails').innerHTML = "Tails: " + tails;
+
+				// update cookies to keep track of heads and tails 
+				document.cookie = "heads=" + heads;
+				document.cookie = "tails=" + tails;
+
+				var ch = document.getElementById('coinholder');
+				// remove any coin that's already there
+				while (ch.children.length > 0) {
+					ch.removeChild(ch.children[0]);
+				}
+
+				document.getElementById('coinholder').appendChild(coin);
+			});
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

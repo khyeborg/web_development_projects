@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Challenge!</title>
+  <style type="text/css">
+    div { border: 1px solid black; margin-bottom: 20px; }
+  </style>
+ </head>
+ <body>
+  <h1>Challenge!</h1>
+  <div>
+    <p>First div p1</p>
+  </div>
+  <div>
+    <p>Second div p1</p>
+    <p>Second div p2</p>
+  </div>
+  <div>
+    <p>Third <strong>div</strong> p1</p>
+    <p>Third div p2</p>
+  </div>
+
+  <script>
+    
+    //document.querySelector('body').firstElementChild.style.color = "yellow";
+    //document.querySelector('div').previousElementSibling.style.color = "yellow";
+    //document.querySelector('div p').parentElement.previousElementSibling.style.color = "yellow";
+    //document.querySelector('strong').parentElement.parentElement.parentElement.firstElementChild.style.color = "yellow";
+    document.querySelector('body').children[2].firstElementChild.style.color = "yellow";
+    // .children returns an array
+    
+
+  </script>
+ </body>
+</html>

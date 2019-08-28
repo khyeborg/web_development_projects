@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+
+		.hidden {
+			display: none;
+		}
+
+		</style>
+
+	</head>
+
+	<body>
+		<h1>Betting Game</h1>
+		<div id="bank">
+			You have <span id="current_bank"></span> left in your bank.
+		</div>
+		<div id="game">
+			<img src="images/pikachu.png">
+			<button id="char_button">Charmander</button>
+			<button id="squirt_button">Squirtle</button>
+			<button id="play_again" class="hidden">Play Again</button>
+		</div>
+
+		<script>
+			// set up bank to be a global variable 
+			var bank = 500; 
+
+			// initially update the bank
+			updateBank();
+
+			// set up betting buttons
+			var charButton = document.getElementById("char_button");
+			var imageContainer = document.querySelector("img");
+
+			charButton.onclick = function() {
+				// flip a coin and see if it comes out Charmander 
+				var chance = parseInt(Math.random() * 2);
+
+				if (chance == 1) {
+					// Charmander 
+					imageContainer.src = "images/charmander.png";
+					bank += 10;
+				}
+				else {
+					imageContainer.src = "images/squirtle.png";
+					bank -= 10;
+				}
+
+				updateBank();
+
+			}
+
+			function updateBank() {
+				var bankElement = document.getElementById("current_bank");
+				bankElement.innerHTML = bank;
+			}
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

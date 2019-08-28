@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assigment 08</title>
+  </head>
+  <body>
+
+    <h1>Pokemon + Weather API</h1>
+
+    <!-- import jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script> 
+
+    <input type="text" id="search_tab"><button id="submit">Search</button>
+    <br>
+
+    <div id="results">
+      <h2 id="pokemon_name"></h2>
+      <img id="pokemon_image">
+    </div>
+    <br>
+    <div id="player"></div>
+
+    <script>
+
+      $(document).ready(function() {
+
+      	document.getElementById('submit').onclick = function() {
+
+      		var weather = document.getElementById('search_tab').value;
+
+      		$.ajax({
+
+	           url: 'https://i6.cims.nyu.edu/~kbl274/webdev/libraries/p5.js',
+                    success: function(data, status) {
+                        console.log("yes");
+                    }
+	        });
+      	}
+        
+      }); 
+
+    </script>
+
+
+  </body>
+</html>

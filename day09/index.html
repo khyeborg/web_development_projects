@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+			.hidden {
+				display: none;
+			}
+
+			#pokemon {
+				width: 200px;
+				padding: 20px;
+				font-family: fantasy;
+				font-size: 200%;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<!-- <img id="secret" class="hidden" src="images/pikachu.png">
+
+		<h1>Intro to the DOM</h1>
+		<h1>This is a second h1</h1>
+		<h1>Intro to the DOM</h1>
+		<h1>This is a second h1</h1>
+		<h1>Intro to the DOM</h1>
+		<h1>This is a second h1</h1>
+		<h1>Intro to the DOM</h1>
+		<h1>This is a second h1</h1>
+		<h1>Intro to the DOM</h1>
+		<h1>This is a second h1</h1> -->
+
+		<!-- <div id="foo">
+			<a href="#">Link 1</a>
+		</div>
+
+		<div id="bar">
+			<a href="#">Link 2</a>
+		</div> -->
+
+		<!-- <form>
+			
+			Type your name: <input type="text" id="password" name="password"> type is the type of input, type can be password
+
+			<button id="clickme">Click me!</button>
+
+		</form> -->
+
+		<form>
+
+			<input placeholder="foobar" type="text" id="pokemon" maxlength="10">
+			<textarea id="address">Default text</textarea> <!-- text area lets you expand, support 'enter' -->
+			<button id="clickme">click me</button>
+
+			<select id="type">
+				<option value="fire">Fire</option>
+				<option value="water" selected>Water</option>
+				<option value="grass">Grass</option>
+			</select>
+
+		</form>
+
+		<script>
+
+			var type = document.getElementById("type");
+
+			document.getElementById("clickme").onclick = function(event) {
+				event.preventDefault();
+				var pokemon = document.getElementById("pokemon");
+				console.log(pokemon.value);
+				console.log(type.value);
+			}
+
+			/*document.getElementById("clickme").onclick = function(event) {
+				// stop the form from resetting 
+				event.preventDefault();
+
+				// get the password
+				var p = document.getElementById("password").value;
+
+				// is the password 'apple'? 
+				if (p === "apple") {
+					document.getElementById("secret").classList.remove("hidden");
+				}
+				else {
+					alert("intruder!");
+				}
+			}*/
+
+			/* document.getElementById("clickme").onclick = function(event) {
+				event.preventDefault(); // prevent the form to reload, force it to stay as is, we know the form tag wants to reload
+
+				// get a ref to the textbox
+				var textBox = document.getElementById("yourname");
+				console.log(textBox.value);
+			} */
+
+			// var secondDiv = document.getElementById("bar");
+			// secondDiv.children[0];
+			// secondDiv.firstChild();
+
+			/* var secondDiv = document.getElementById("bar");
+			var secondLink = secondDiv.querySelector("a");
+
+			console.log(secondLink); */
+
+			/* function pikachu(a) {
+				console.log(a);
+			}
+
+			pikachu();
+
+			var h1 = document.querySelectorAll("h1");
+
+			for (var i = 0; i < h1.length; i++) {
+				h1[i].onclick = function(event) {
+					console.log("You clicked me!");
+					console.log(event);
+					console.log(event.currentTarget); // event is an object, currentTarget is a property (DOM query), event.currentTarget refers to the whatever
+					event.currentTarget.style["background-color"] = "yellow";
+				}
+			} */
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

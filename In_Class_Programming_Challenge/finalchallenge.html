@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Challenge #</title>
+    <style type="text/css">
+      body {
+        font-family: sans-serif;
+      }
+
+      #container {
+        position: relative;
+        width: 2000px;
+        height: 2000px;
+        margin: auto;
+      }
+
+      .cell {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+      }
+
+      .color {
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Final Challenge</h1>
+
+    <!-- for this challenge you will be creating an interactive "pixel painting" program,
+         very simliar to the 'grid' images that you solved for Challenge #3.
+
+         this tutorial will walk you through the basic setup.  after that you will be asked to
+         extend your program to include additional features.
+
+    -->
+
+    <!-- first, we need a grid of elements that will serve as our 'canvas'
+         for the initial implementation we will have just four elements in this grid.
+         refer to the CSS rules for the 'cell' class to see how these cells are being aligned
+         (using absolute positioning) -->
+    <button id="clear">Clear Canvas</button>
+    <div id="color"></div>
+    <div id="container">
+      <!-- <div id="cell_0_0" class="cell" style="top: 0px; left: 0px;"></div>
+      <div id="cell_0_1" class="cell" style="top: 0px; left: 250px;"></div>
+      <div id="cell_1_0" class="cell" style="top: 250px; left: 0px;"></div>
+      <div id="cell_1_1" class="cell" style="top: 250px; left: 250px;"></div> -->
+    </div>
+
+
+    <script type="text/javascript">
+
+      // that's the basic setup!  here's what should do now to extend this:
+      // 1. create a 20 x 20 grid of cells. note that you probably don't want to do this
+      //    using straight HTML since it will take forever.  do this using a loop to
+      //    algorithmiclly create these cells (hint: use a nested 'for' loop)
+      var mainDiv = document.getElementById("container");
+      var vertical = 0;
+      var horizontal = 0;
+
+      for (var i = 0; i < 20; i++) {
+        vertical += 100;
+        horizontal = 0;
+        for (var j = 0; j < 20; j++) {
+          var newElement = document.createElement("div");
+          newElement.classList.add("cell");
+          newElement.style.top = vertical + "px";
+          newElement.style.left = horizontal + "px";
+          horizontal += 100;
+          mainDiv.append(newElement);
+        }
+      }
+
+      // 2. when you create these elements attach the exact same 'onclick 'function as
+      //    is presented above. this will let you click on your tiny cells and turn them black
+      var allCellElements = document.querySelectorAll('.cell');
+      for (var i = 0; i < allCellElements.length; i++) {
+        // tell this cell that it should listen for a mouse event
+        allCellElements[i].onclick = function() {
+          this.style['background-color'] = currentColor;
+        }
+      }
+
+      // 3. once you can do this, add in a series of buttons that will let the user select
+      //    different colors to draw with (red, blue, green, etc).  when the user clicks on
+      //    these buttons you need to 'remember' the color that they clicked - hint: use a
+      //    variable!
+      var colorDiv = document.getElementById("color");
+      var colorArray = ["red", "green", "blue", "aqua", "orange", "yellow", "pink", "purple", "brown", "black"]
+      var horizontalColor = 0;
+
+      for (var i = 0; i < colorArray.length; i++) {
+        var colorElement = document.createElement("div");
+        colorElement.classList.add("color");
+        colorElement.style['background-color'] = colorArray[i];
+        colorElement.style.top = "0px"; 
+        colorElement.style.left = horizontalColor + "px";
+        horizontalColor += 200;
+        mainDiv.append(colorElement);
+      }
+
+      // 4. let the user draw with the selected color (hint: refer to this variable!)
+      var allColorElements = document.querySelectorAll('.color');
+      var currentColor = ""
+
+      for (var i = 0; i < allColorElements.length; i++) {
+        // tell this cell that it should listen for a mouse event
+        allColorElements[i].onclick = function() {
+          currentColor = this.style['background-color'];
+        }
+      }
+
+      // 5. give the user the ability to clear the canvas (hint: visit all elements and reset
+      //    their background-color style)
+      var clearButton = document.getElementById("clear");
+      var allBlocks = document.querySelector("#container").children;
+      clearButton.onclick = function() {
+        for (var i = 0; i < allBlocks.length - 10; i++) {
+          allBlocks[i].style["background-color"] = "";
+        }
+      }
+
+    </script>
+  </body>
+</html>

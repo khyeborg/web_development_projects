@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Assigment 02</title>
+		<meta charset="utf-8"/>
+
+		<style>
+
+			#main {
+				width: 720px;
+				margin: auto;
+				position: relative;
+			}
+
+			#main_pic {
+				width: 720px;
+				display: block;
+				margin: auto;
+			}
+
+			#head {
+				position: absolute;
+				left: 518px;
+				top: 323px;
+				width: 75px;
+			}
+
+			#body {
+				position: absolute;
+				left: 485px;
+				top: 403px;
+				width: 140px;
+			}
+
+			#words {
+				position: absolute;
+				left: 20px;
+				top: 23px;
+				color: white;
+				font-family: helvetica;
+				font-size: 200%;
+				font-weight: bold;
+			}
+
+			#message {
+				position: absolute;
+				padding-left: 15px;
+				padding-right: 15px;
+				left: 20px;
+				top: 78px;
+				background-color: white;
+				font-size: 80%;
+				background-color: rgba(255, 255, 255, .8);
+				border-radius: 15px;
+			}
+
+			#number1 {
+				position: absolute;
+				left: 25px;
+				top: 173px;
+				width: 80px;
+			}
+
+			#number2 {
+				position: absolute;
+				left: 125px;
+				top: 173px;
+				width: 80px;
+			}
+
+			#number3 {
+				position: absolute;
+				left: 225px;
+				top: 173px;
+				width: 80px;
+			}
+
+			#pokemon {
+				position: absolute;
+				left: 335px;
+				top: 383px;
+				width: 140px;
+			}
+
+			#hat {
+				position: absolute;
+				left: 495px;
+				top: 288px;
+				width: 120px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<script>
+
+			// time stuff
+			var now = new Date();
+			var hour = now.getHours();
+			var minute = now.getMinutes();
+			var greeting;
+			var background;
+			var dayNight;
+
+			// hour = 6;
+			// minute = 0;
+
+			// determine greeting and backround picture
+			if (hour < 6) {
+				greeting = "Good Night!";
+				background = "night";
+			}
+			else if (hour < 12) {
+				greeting = "Good Morning!";
+				background = "morning";
+			}
+			else if (hour < 18) {
+				greeting = "Good Afternoon!";
+				background = "afternoon";
+			}
+			else {
+				greeting = "Good Evening!";
+				background = "evening";
+			}
+
+			// determine am or pm
+			if (hour > 12) {
+				hour = hour - 12;
+				dayNight = "pm";
+			}
+			else if (hour == 12) {
+				dayNight = "pm";
+			}
+			else {
+				dayNight = "am";
+			}
+
+			if (minute < 10) {
+				minute = "0" + minute;
+			}
+
+			// lucky numbers
+			var numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+			var numPicArray = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+			var num1, num2, num3;
+			var numPic1, numPic2, numPic3;
+			var rand1, rand2, rand3;
+
+			rand1 = parseInt(Math.random() * numArray.length);
+			num1 = numArray[rand1];
+			numPic1 = numPicArray[rand1];
+			numArray.splice(rand1, 1);
+			numPicArray.splice(rand1, 1);
+
+			rand2 = parseInt(Math.random() * numArray.length);
+			num2 = numArray[rand2];
+			numPic2 = numPicArray[rand2];
+			numArray.splice(rand2, 1);
+			numPicArray.splice(rand2, 1);
+
+			rand3 = parseInt(Math.random() * numArray.length);
+			num3 = numArray[rand3];
+			numPic3 = numPicArray[rand3];
+			numArray.splice(rand3, 1);
+			numPicArray.splice(rand3, 1);
+
+			// lego head
+			var headArray = ["head1", "head2", "head3", "head4", "head5", "head6"];
+			var headNum = parseInt(Math.random() * headArray.length);
+
+			// lego body
+			var bodyArray = ["body1", "body2", "body3", "body4", "body5", "body6"];
+			var bodyNum = parseInt(Math.random() * bodyArray.length);
+
+			// words 
+			var wordsArray = ["Awesome", "Fantastic", "Fabulous", "Superb", "Perfect", "Brilliant", "Coming up Roses"];
+			var wordsNum = parseInt(Math.random() * wordsArray.length);
+
+			// pokemons
+			var pokemonArray = ["eevee", "espeon", "flareon", "glaceon", "jolteon", "leafeon", "sylveon", "umbreon", "vaporeon"];
+			var pokemonNum = parseInt(Math.random() * pokemonArray.length);
+
+			// hats 
+			var hatArray = ["hat1", "hat2", "hat3"];
+			var hatNum = parseInt(Math.random() * hatArray.length);
+
+			// write the background to the page
+			document.write('<div id="main"><img id="main_pic" src="images/backgrounds/' + background + '.png">');
+
+			// write the lego head and body to the page
+			document.write('<img id="head" src="images/heads/' + headArray[headNum] + '.png">');
+			document.write('<img id="body" src="images/bodies/' + bodyArray[bodyNum] + '.png">');
+
+			// write the title to the page
+			document.write('<div id="words">Everything is ' + wordsArray[wordsNum] + '!</div>');
+
+			// write the time, greeting, and lucky numbers to the page
+			document.write('<div id="message"><p>The time is currently ' + hour + ':' + minute + dayNight + ' - ' + greeting + '</p><p>Your three lucky numbers today are ' + num1 + ', ' + num2 + ' and ' + num3 + '</p></div>');
+
+			// write the number pictures to the screen
+			document.write('<img id="number1" src="images/numbers/' + numPic1 + '.png">');
+			document.write('<img id="number2" src="images/numbers/' + numPic2 + '.png">');
+			document.write('<img id="number3" src="images/numbers/' + numPic3 + '.png">');
+
+			// write the Pokemon to the screen
+			document.write('<img id="pokemon" src="images/pokemons/' + pokemonArray[pokemonNum] + '.png">');
+
+			// write the hat to the screen
+			document.write('<img id="hat" src="images/hats/' + hatArray[hatNum] + '.png"></div>');
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

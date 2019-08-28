@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Firebase</title>
+    <meta charset="utf-8"/>
+
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+
+    <h1>Hello, Firebase</h1>
+
+    <form>
+      First Name: <input type="text" id="first"><br>
+      Last Name: <input type="text" id="last"><br>
+      <button id="save">Save</button>
+    </form>
+
+    <div id="results">
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBBSo4TEwBmLCEzW035cJlt-1y8bsbQOK8",
+        authDomain: "in-class-test-2019-khye.firebaseapp.com",
+        databaseURL: "https://in-class-test-2019-khye.firebaseio.com",
+        projectId: "in-class-test-2019-khye",
+        storageBucket: "in-class-test-2019-khye.appspot.com",
+        messagingSenderId: "258555850867",
+        appId: "1:258555850867:web:52d4cd4b37094b5e"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Initialize a connection to our database
+      var db = firebase.firestore();
+
+      var first = document.getElementById("first");
+      var last = document.getElementById("last");
+      var save = document.getElementById("save");
+      var results = document.getElementById("results");
+
+      // ask firebase for a one time pull of data from the 'people' collection
+      // db.collection("people").onSnapshot(function(snapshot) { // everytime something is new, get the data
+      db.collection("people").where("lastName", "==", "Pokemon").get().then(function(snapshot) { // ajax equivalent of url + success - gets one time + only delivers last name = Pokemon
+        console.log(snapshot);
+
+        results.innerHTML = "";
+        for (var i = 0; i < snapshot.docs.length; i++) {
+          console.log(snapshot.docs[i].data());
+          results.innerHTML += snapshot.docs[i].data().firstName + ', ' + snapshot.docs[i].data().lastName + '<br>';
+        }
+      });
+
+      save.onclick = function(event) {
+        event.preventDefault();
+
+        // save this into our database
+        // send some data into our databse! 
+        db.collection("people").add({
+          firstName: first.value,
+          lastName: last.value
+        })
+        // try-catch block
+        .then(function(ref) {
+          console.log("data stored successfully with ref #: ");
+          console.log(ref.id);
+        })
+        .catch(function(error) {
+          console.log("Error! " + error);
+        });
+      }
+
+    </script>
+    
+  </body>
+</html>
+
+
+

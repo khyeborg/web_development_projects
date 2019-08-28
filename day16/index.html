@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Day 19</title>
+		<meta charset="utf8">
+		
+	</head>
+
+	<body>
+		<form action="process.php" method="POST"> <!-- limitations of the get method: url can only be a certain length + everybody can see them -->
+			<!-- GET: url-based, POST: packages... values are not shown in url -->
+			<!-- ids do not translate to the server, only names do -->
+			Noun: <input type="text" name="noun"><br> 
+			Verb: <input ntype="text" name="verb"><br>
+			Adjective: <input ntype="text" name="adjective"><br>
+			Adverb: <input ntype="text" name="adverb"><br>
+			<input type="submit">
+		</form>
+	</body>
+</html>

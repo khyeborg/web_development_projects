@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Development</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      .hidden {
+        display: none;
+      }
+      .auth_button {
+        float: right;
+        margin-top: 10px;
+        padding: 3px;
+        font-size: 120%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Full Lifecycle CRUD Application</h1>
+
+    <p>"CRUD" stands for "Create, Read, Update and Delete" - it describes the basic functionality necessary in most user-driven applications.  This application is a demo "CRUD" application that lets the user do the following:</p>
+    <ul>
+      <li>Login and Logout (authentication)</li>
+      <li>Author and save notes (create)</li>
+      <li>View existing notes (read)</li>
+      <li>Remove existing notes (delete)</li>
+    </ul>
+
+    <hr>
+
+    <!-- authentication interface elements -->
+    <button id="login_button" class="auth_button">Login</button>
+    <button id="logout_button" class="hidden auth_button">Logout (<span></span>)</button>
+
+    <!-- user panel - only show when logged in  -->
+    <div id="user_panel" class="hidden">
+      <h2>Welcome, <span id="welcome"></span></h2>
+
+      <h3>Add New Note</h3>
+      <div id="add_note_panel">
+        Note: <input type="text" id="note"><button id="save_note">Save</button>
+      </div>
+
+      <h3>Existing Notes</h3>
+      <div id="existing_note_panel"></div>
+
+    </div>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <script>
+
+      $(document).ready(function()  {
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyBBSo4TEwBmLCEzW035cJlt-1y8bsbQOK8",
+          authDomain: "in-class-test-2019-khye.firebaseapp.com",
+          databaseURL: "https://in-class-test-2019-khye.firebaseio.com",
+          projectId: "in-class-test-2019-khye",
+          storageBucket: "in-class-test-2019-khye.appspot.com",
+          messagingSenderId: "258555850867",
+          appId: "1:258555850867:web:52d4cd4b37094b5e"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var db = firebase.firestore();
+
+        // some DOM elements
+        var login_button = document.getElementById('login_button');
+        var logout_button = document.getElementById('logout_button');
+        var user_panel = document.getElementById('user_panel');
+        var welcome = document.getElementById('welcome');
+        var note = document.getElementById('note');
+        var save_note = document.getElementById('save_note');
+        var existing_note_panel = document.getElementById('existing_note_panel');
+
+        // when they click the login button, ask google to authenticate them 
+        login_button.onclick = function(event) {
+
+          var provider = new firebase.auth.GoogleAuthProvider();
+          provider.setCustomParameters ({
+            prompt: 'select_account' // select the correct google account
+          });
+          firebase.auth().signInWithPopup(provider);
+
+        }
+
+        var user_info = false;
+        firebase.auth().onAuthStateChanged(function(user) { // run everytime google reports whether the user has logged in or out
+
+          user_info = user;
+
+          // FLIPPING 
+          // do we have a user? if so, they have authenticated 
+          if (user) {
+            login_button.classList.add("hidden");
+            logout_button.classList.remove("hidden");
+
+            // update logout button with their email
+            document.querySelector('#logout_button span').innerHTML = user_info.email;
+
+            // show the user panel
+            user_panel.classList.remove("hidden");
+            welcome.innerHTML = user_info.displayName;
+
+            // let's set it up so that everytime a new note for this user is posted, we need to get the data from the server 
+            db.collection("notebook").where("email", "==", user_info.email).orderBy('time_stamp').onSnapshot(function(snapshot) { // whenever something has changed in the notebook, db = database 
+              
+              // visit every note that was sent to us
+              for (var i = 0; i < snapshot.docs.length; i++) {
+
+                if (!document.getElementById(snapshot.docs[i].id)) {
+                  var temp = document.createElement('div');
+                  temp.id = snapshot.docs[i].id;
+                  temp.innerHTML = snapshot.docs[i].data().note_message;
+                  existing_note_panel.appendChild(temp);
+                }
+              }
+
+            });
+
+          }
+
+          // they are logged out
+          else {
+            login_button.classList.remove("hidden");
+            logout_button.classList.add("hidden");
+
+            // hide the user panel
+            user_panel.classList.add("hidden");
+            welcome.innerHTML = "";
+          }
+
+          console.log(user);
+
+        });
+
+        logout_button.onclick = function(event) {
+          firebase.auth().signOut();
+
+          while (existing_note_panel.children.length > 0) {
+            existing_note_panel.removeChild(existing_note_panel.firstElementChild);
+          }
+        }
+
+        save_note.onclick = function() {
+          var n = note.value;
+
+          if (user_info && n.length > 0) {
+            var now = new Date().getTime();
+
+            db.collection("notebook").add({ // add something to the notebook collection
+              note_message: n, 
+              email: user_info.email,
+              time_stamp: now
+            }) 
+            .then(function(docRef) {
+              console.log("Note saved!");
+              note.value = '';
+            });
+
+
+          }
+
+        }
+
+
+      }); // end document ready
+
+    </script>
+
+  </body>
+
+</html>

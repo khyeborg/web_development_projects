@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Challenge!</title>
+  <style type="text/css">
+    div { width: 100px; min-height: 100px; border: 1px solid black; }
+  </style>
+ </head>
+ <body>
+  <h1>Challenge!</h1>
+  <div id="a"></div>
+  <div class="b"></div>
+  <div></div>
+
+  <script>
+    
+    for (var i = 0; i < 100; i++) {
+      // I can create any tags I want 
+    	var star = document.createElement("img");
+    	star.src = "images/star.png";
+   	 	  
+      //var body = document.querySelector("body");
+      //var body = document.querySelector("#a");
+      //var body = document.querySelector(".b");
+      var body = document.querySelectorAll("div");
+      star.style.width = "50px";
+   	  star.style.height = "50px";
+      
+      //body.appendChild(star);
+      body[2].appendChild(star); // telling body[2] that star is your parent, each element can only have ONE PARENT
+    }
+    
+    // document.querySelector("body").appendChild(star); the same as previous 
+    // document.write only works when the page runs (overwrites the page)
+   
+
+    
+  </script>
+ </body>
+</html>

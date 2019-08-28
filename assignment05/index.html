@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Assigment 05</title>
+		<meta charset="utf-8"/>
+
+		<style>
+			.hidden {
+				display: none;
+			}
+
+			#main {
+				margin: auto;
+				text-align: center;
+				position: relative;
+				background-color: black;
+				color: white;
+				font-family: Courier New;
+				min-height: 900px;
+			}
+
+			div {
+				position: relative;
+			}
+
+			h1 {
+				padding: 20px;
+			}
+
+			h2 {
+
+			}
+
+			#game {
+				overflow: hidden;
+				display: inline-block;
+			}	
+
+			#game div {
+
+				margin: auto;
+				text-align: center;
+			}	
+
+			#first, #third {
+				top: 50px;
+			}
+
+			#third p {
+				margin: 5px;
+				font-size: 110%;
+			}
+
+			#third_button {
+				text-align: center;
+				font-family: Courier New;
+				font-size: 200%;
+				padding: 10px;
+			}
+
+			.first_buttons {
+				text-align: center;
+				font-family: Courier New;
+				font-size: 200%;
+				padding: 10px;
+			}
+
+			#third_best_time {
+				text-align: left;
+			}
+
+			#third_center {
+				margin: auto;
+				text-align: center;
+				width: 190px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="main">
+			<div id="first">
+				<h1>Memory Matching Madness!</h1>
+				<p>Play a fast-paced game of "memory" and try and beat your best time!</p>
+				<br><br>
+				<button class="first_buttons" id="first_easy_button" data-height="3" data-width="4" data-gamemode="Easy">Easy</button>
+				<br><br><br><br>
+				<button class="first_buttons" id="first_medium_button" data-height="4" data-width="5" data-gamemode="Medium">Medium</button>
+				<br><br><br><br>
+				<button class="first_buttons" id="first_hard_button" data-height="5" data-width="6" data-gamemode="Hard">Hard</button>
+			</div>
+			<div class="hidden" id="second">
+				<div id="title">
+					<h1>Ready, Set, Match!</h1>
+					<h2>Time: 0s</h2>
+				</div>
+				<div id="game">
+				</div>
+			</div>
+
+			<div class="hidden" id="third">
+				<h1>Game over!</h1>
+				<p id="third_game_mode"></p>
+				<p id="third_your_time"></p>
+				<div id="third_center"><p id="third_best_time"></p></div>
+				<br>
+				<p id="third_high_score"></p>
+				<br>
+				<button id="third_button">Play Again!</button>
+			</div>
+		</div>
+
+		<script>	
+			// references variables
+			var body = document.querySelector("body");
+			var gameDiv = document.getElementById("game");
+			var timeDiv = document.querySelector("h2");
+			var first = document.getElementById("first");
+			var second = document.getElementById("second");
+			var third = document.getElementById("third");
+			var thirdButton = document.getElementById("third_button");
+			var thirdGameMode = document.getElementById("third_game_mode");
+			var thirdHighScore = document.getElementById("third_high_score");
+			var firstButtons = document.querySelectorAll(".first_buttons");
+			var iconsPerLine = 0;
+			var totalIcons = 0;
+			var iconsPerLineCounter = 0;
+			var tempSize = 128;
+			var gameMode = "";
+			var numberOfHighScorers = 0;
+			var highScoreArray = [];
+
+			var assets = ['snorlax.png', 'electrabuzz.png', 'chansey.png', 'oddish.png', 'pikachu.png', 'paras.png', 'arcanine.png', 'ponita.png', 'venonat.png', 'eggsecute.png', 'machop.png', 'pidgey.png','psyduck.png', 'tauros.png', 'vulpix.png', 'gloom.png', 'krabby.png', 'butterfree.png', 'bulbasaur.png', 'clefairy.png','koffing.png', 'goldeen.png', 'magikarp.png', 'beedrill.png','lapras.png', 'meowth.png', 'ekans.png', 'jigglypuff.png','horsea.png', 'polywog.png', 'sandshrew.png', 'rattata.png','gengar.png', 'eevee.png', 'bellsprout.png', 'squirtle.png', 'seel.png', 'caterpie.png'];
+			var assetsCopy = assets.slice();
+
+			var tokens = [];
+
+			// game variables
+			var clickable = true;
+			var firstClicked = false;
+			var secondClicked = false;
+			var firstPokemon = ""; 
+			var secondPokemon = "";
+			var firstClickedTemp;
+			var secondClickedTemp;
+			var correctCount = 0;
+			var correctCountToWin = 0;
+			var audio;
+			var startTime = new Date().getTime();
+			var timeElapsed = 0;
+
+			// local storage
+			if (window.localStorage.getItem('easyBestTime') === null) {
+				window.localStorage.setItem('easyBestTime', '9999999999');
+			}
+			if (window.localStorage.getItem('mediumBestTime') === null) {
+				window.localStorage.setItem('mediumBestTime', '9999999999');
+			}
+			if (window.localStorage.getItem('hardBestTime') === null) {
+				window.localStorage.setItem('hardBestTime', '9999999999');
+			}
+
+			if (window.localStorage.getItem('easyBestTimeArray') === null) {
+				window.localStorage.setItem('easyBestTimeArray', '[9999999999]');
+			}
+			if (window.localStorage.getItem('mediumBestTimeArray') === null) {
+				window.localStorage.setItem('mediumBestTimeArray', '[9999999999]');
+			}
+			if (window.localStorage.getItem('hardBestTimeArray') === null) {
+				window.localStorage.setItem('hardBestTimeArray', '[9999999999]');
+			}
+
+			var easyBestTimeArray = JSON.parse(window.localStorage.getItem('easyBestTimeArray'));
+			var mediumBestTimeArray = JSON.parse(window.localStorage.getItem("mediumBestTimeArray"));
+			var hardBestTimeArray = JSON.parse(window.localStorage.getItem("hardBestTimeArray"));
+			
+			function calculateTimeElapsed() {
+				if (correctCount < correctCountToWin) {
+					timeElapsed = parseInt((new Date().getTime() - startTime) / 1000);
+					timeDiv.innerHTML = "Time: " + timeElapsed + "s";
+					setTimeout(calculateTimeElapsed, 1000);
+				}
+			}
+
+			function backToPokeball() {
+				firstClickedTemp.src = "images/pokeball.png";
+				secondClickedTemp.src = "images/pokeball.png";
+				clickable = true;
+			}
+
+			function playSound(url) {
+			  audio = document.createElement('audio');
+			  audio.style.display = "none";
+			  audio.src = url;
+			  audio.autoplay = true;
+			  body.appendChild(audio);
+			}
+
+			function hideSecondScreen() {
+				second.classList.add("hidden");
+			}
+
+			function showThirdScreen() {
+
+				// everytime a player wins, store their data
+				if (totalIcons === 12) {
+					easyBestTimeArray.push(timeElapsed);
+					window.localStorage.setItem('easyBestTimeArray', "[" + easyBestTimeArray + "]");
+					easyBestTimeArray = JSON.parse(window.localStorage.getItem('easyBestTimeArray'));
+					var easyBestTimeArrayCopy = easyBestTimeArray.slice();
+
+					if (easyBestTimeArrayCopy.length === 2) {
+						numberOfHighScorers = 1;
+						var best1 = easyBestTimeArrayCopy[0];
+						// figure out first place
+						for (var i = 0; i < easyBestTimeArrayCopy.length; i++) {
+							if (easyBestTimeArrayCopy[i] <= best1) {
+								best1 = easyBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+					}
+
+					else if (easyBestTimeArrayCopy.length === 3) {
+						numberOfHighScorers = 2;
+						var best1 = easyBestTimeArrayCopy[0];
+						var best1Position = 0;
+						// figure out first place
+						for (var i = 0; i < easyBestTimeArrayCopy.length; i++) {
+							if (easyBestTimeArrayCopy[i] <= best1) {
+								best1 = easyBestTimeArrayCopy[i];
+								best1Position = i;
+							}
+						}
+						easyBestTimeArrayCopy.splice(best1Position, 1);
+						// figure out second place
+						var best2 = easyBestTimeArrayCopy[0];
+						for (var i = 0; i < easyBestTimeArrayCopy.length; i++) {
+							if (easyBestTimeArrayCopy[i] <= best2) {
+								best2 = easyBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+						highScoreArray.push(best2);
+					}
+
+					else if (easyBestTimeArrayCopy.length >= 4) {
+						numberOfHighScorers = 3;
+						var best1 = easyBestTimeArrayCopy[0];
+						var best1Position = 0;
+						// figure out first place
+						for (var i = 0; i < easyBestTimeArrayCopy.length; i++) {
+							if (easyBestTimeArrayCopy[i] <= best1) {
+								best1 = easyBestTimeArrayCopy[i];
+								best1Position = i;
+							}
+						}
+						easyBestTimeArrayCopy.splice(best1Position, 1);
+						// figure out second place
+						var best2 = easyBestTimeArrayCopy[0];
+						var best2Position = 0;
+						for (var i = 0; i < easyBestTimeArrayCopy.length; i++) {
+							if (easyBestTimeArrayCopy[i] <= best2) {
+								best2 = easyBestTimeArrayCopy[i];
+								best2Position = i;
+							}
+						}
+						easyBestTimeArrayCopy.splice(best2Position, 1);
+						// figure out third place
+						var best3 = easyBestTimeArrayCopy[0];
+						for (var i = 0; i < easyBestTimeArrayCopy.length; i++) {
+							if (easyBestTimeArrayCopy[i] <= best3) {
+								best3 = easyBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+						highScoreArray.push(best2);
+						highScoreArray.push(best3);
+					}
+				}
+
+				else if (totalIcons === 20) {
+					mediumBestTimeArray.push(timeElapsed);
+					window.localStorage.setItem('mediumBestTimeArray', "[" + mediumBestTimeArray + "]");
+					mediumBestTimeArray = JSON.parse(window.localStorage.getItem('mediumBestTimeArray'));
+					var mediumBestTimeArrayCopy = mediumBestTimeArray.slice();
+
+					if (mediumBestTimeArrayCopy.length === 2) {
+						numberOfHighScorers = 1;
+						var best1 = mediumBestTimeArrayCopy[0];
+						// figure out first place
+						for (var i = 0; i < mediumBestTimeArrayCopy.length; i++) {
+							if (mediumBestTimeArrayCopy[i] <= best1) {
+								best1 = mediumBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+					}
+
+					else if (mediumBestTimeArrayCopy.length === 3) {
+						numberOfHighScorers = 2;
+						var best1 = mediumBestTimeArrayCopy[0];
+						var best1Position = 0;
+						// figure out first place
+						for (var i = 0; i < mediumBestTimeArrayCopy.length; i++) {
+							if (mediumBestTimeArrayCopy[i] <= best1) {
+								best1 = mediumBestTimeArrayCopy[i];
+								best1Position = i;
+							}
+						}
+						mediumBestTimeArrayCopy.splice(best1Position, 1);
+						// figure out second place
+						var best2 = mediumBestTimeArrayCopy[0];
+						for (var i = 0; i < mediumBestTimeArrayCopy.length; i++) {
+							if (mediumBestTimeArrayCopy[i] <= best2) {
+								best2 = mediumBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+						highScoreArray.push(best2);
+					}
+
+					else if (mediumBestTimeArrayCopy.length >= 4) {
+						numberOfHighScorers = 3;
+						var best1 = mediumBestTimeArrayCopy[0];
+						var best1Position = 0;
+						// figure out first place
+						for (var i = 0; i < mediumBestTimeArrayCopy.length; i++) {
+							if (mediumBestTimeArrayCopy[i] <= best1) {
+								best1 = mediumBestTimeArrayCopy[i];
+								best1Position = i;
+							}
+						}
+						mediumBestTimeArrayCopy.splice(best1Position, 1);
+						// figure out second place
+						var best2 = mediumBestTimeArrayCopy[0];
+						var best2Position = 0;
+						for (var i = 0; i < mediumBestTimeArrayCopy.length; i++) {
+							if (mediumBestTimeArrayCopy[i] <= best2) {
+								best2 = mediumBestTimeArrayCopy[i];
+								best2Position = i;
+							}
+						}
+						mediumBestTimeArrayCopy.splice(best2Position, 1);
+						// figure out third place
+						var best3 = mediumBestTimeArrayCopy[0];
+						for (var i = 0; i < mediumBestTimeArrayCopy.length; i++) {
+							if (mediumBestTimeArrayCopy[i] <= best3) {
+								best3 = mediumBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+						highScoreArray.push(best2);
+						highScoreArray.push(best3);
+					}
+				}
+
+				else if (totalIcons === 30) {
+					hardBestTimeArray.push(timeElapsed);
+					window.localStorage.setItem('hardBestTimeArray', "[" + hardBestTimeArray + "]");
+					hardBestTimeArray = JSON.parse(window.localStorage.getItem('hardBestTimeArray'));
+					var hardBestTimeArrayCopy = hardBestTimeArray.slice();
+
+					if (hardBestTimeArrayCopy.length === 2) {
+						numberOfHighScorers = 1;
+						var best1 = hardBestTimeArrayCopy[0];
+						// figure out first place
+						for (var i = 0; i < hardBestTimeArrayCopy.length; i++) {
+							if (hardBestTimeArrayCopy[i] <= best1) {
+								best1 = hardBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+					}
+
+					else if (hardBestTimeArrayCopy.length === 3) {
+						numberOfHighScorers = 2;
+						var best1 = hardBestTimeArrayCopy[0];
+						var best1Position = 0;
+						// figure out first place
+						for (var i = 0; i < hardBestTimeArrayCopy.length; i++) {
+							if (hardBestTimeArrayCopy[i] <= best1) {
+								best1 = hardBestTimeArrayCopy[i];
+								best1Position = i;
+							}
+						}
+						hardBestTimeArrayCopy.splice(best1Position, 1);
+						// figure out second place
+						var best2 = hardBestTimeArrayCopy[0];
+						for (var i = 0; i < hardBestTimeArrayCopy.length; i++) {
+							if (hardBestTimeArrayCopy[i] <= best2) {
+								best2 = hardBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+						highScoreArray.push(best2);
+					}
+
+					else if (hardBestTimeArrayCopy.length >= 4) {
+						numberOfHighScorers = 3;
+						var best1 = hardBestTimeArrayCopy[0];
+						var best1Position = 0;
+						// figure out first place
+						for (var i = 0; i < hardBestTimeArrayCopy.length; i++) {
+							if (hardBestTimeArrayCopy[i] <= best1) {
+								best1 = hardBestTimeArrayCopy[i];
+								best1Position = i;
+							}
+						}
+						hardBestTimeArrayCopy.splice(best1Position, 1);
+						// figure out second place
+						var best2 = hardBestTimeArrayCopy[0];
+						var best2Position = 0;
+						for (var i = 0; i < hardBestTimeArrayCopy.length; i++) {
+							if (hardBestTimeArrayCopy[i] <= best2) {
+								best2 = hardBestTimeArrayCopy[i];
+								best2Position = i;
+							}
+						}
+						hardBestTimeArrayCopy.splice(best2Position, 1);
+						// figure out third place
+						var best3 = hardBestTimeArrayCopy[0];
+						for (var i = 0; i < hardBestTimeArrayCopy.length; i++) {
+							if (hardBestTimeArrayCopy[i] <= best3) {
+								best3 = hardBestTimeArrayCopy[i];
+							}
+						}
+						highScoreArray.push(best1);
+						highScoreArray.push(best2);
+						highScoreArray.push(best3);
+					}
+				}
+
+				// determine if current play is the best play for different modes
+				if (totalIcons === 12) {
+					if (timeElapsed < window.localStorage.getItem('easyBestTime')) {
+						window.localStorage.setItem('easyBestTime', timeElapsed);
+						var bestEasyPlayer = prompt("Higher score!!! Please enter your name. ");
+						window.localStorage.setItem('bestEasyPlayer', bestEasyPlayer);
+					}
+					thirdGameMode.innerHTML = "Game mode: " + gameMode + "<br><br>";
+					document.getElementById("third_your_time").innerHTML = "Your time: " + timeElapsed + "s<br><br>";
+					
+					for (var i = 0; i < numberOfHighScorers; i++) {
+						document.getElementById("third_best_time").innerHTML += "Best time " + parseInt(i + 1) + ": " + highScoreArray[i] + "s ";
+						document.getElementById("third_best_time").innerHTML += "<br>";
+					}
+
+					thirdHighScore.innerHTML = "Best score of " + highScoreArray[0] + "s by " + window.localStorage.getItem('bestEasyPlayer') + ".";
+				}
+				else if (totalIcons === 20) {
+					if (timeElapsed < window.localStorage.getItem('mediumBestTime')) {
+						window.localStorage.setItem('mediumBestTime', timeElapsed);
+						var bestMediumPlayer = prompt("Higher score!!! Please enter your name. ");
+						window.localStorage.setItem('bestMediumPlayer', bestMediumPlayer);
+					}
+					thirdGameMode.innerHTML = "Game mode: " + gameMode + "<br><br>";
+					document.getElementById("third_your_time").innerHTML = "Your time: " + timeElapsed + "s<br><br>";
+					
+					for (var i = 0; i < numberOfHighScorers; i++) {
+						document.getElementById("third_best_time").innerHTML += "Best time " + parseInt(i + 1) + ": " + highScoreArray[i] + "s ";
+						document.getElementById("third_best_time").innerHTML += "<br>";
+					}
+
+					thirdHighScore.innerHTML = "Best score of " + highScoreArray[0] + "s by " + window.localStorage.getItem('bestMediumPlayer') + ".";
+				}
+				else if (totalIcons === 30) {
+					if (timeElapsed < window.localStorage.getItem('hardBestTime')) {
+						window.localStorage.setItem('hardBestTime', timeElapsed);
+						var bestHardPlayer = prompt("Higher score!!! Please enter your name. ");
+						window.localStorage.setItem('bestHardPlayer', bestHardPlayer);
+					}
+					thirdGameMode.innerHTML = "Game mode: " + gameMode + "<br><br>";
+					document.getElementById("third_your_time").innerHTML = "Your time: " + timeElapsed + "s<br><br>";
+					
+					for (var i = 0; i < numberOfHighScorers; i++) {
+						document.getElementById("third_best_time").innerHTML += "Best time " + parseInt(i + 1) + ": " + highScoreArray[i] + "s ";
+						document.getElementById("third_best_time").innerHTML += "<br>";
+					}
+
+					thirdHighScore.innerHTML = "Best score of " + highScoreArray[0] + "s by " + window.localStorage.getItem('bestHardPlayer') + ".";
+				}
+				third.classList.remove("hidden");
+			}
+
+			// set up event listeners
+			thirdButton.addEventListener('click', function(event) {
+				// reset all game variables before replay
+				clickable = true;
+				firstClicked = false;
+				secondClicked = false;
+				firstPokemon = ""; 
+				secondPokemon = "";
+				firstClickedTemp;
+				secondClickedTemp;
+				correctCount = 0;
+				correctCountToWin = 0;
+				startTime = new Date().getTime();
+				timeElapsed = 0;
+				iconsPerLine = 0;
+				totalIcons = 0;
+				iconsPerLineCounter = 0;
+				timeDiv.innerHTML = "Time: 0s";
+				assetsCopy = assets.slice();
+				tokens = [];
+				gameMode = "";
+				numberOfHighScorers = 0;
+				highScoreArray = [];
+				document.getElementById("third_best_time").innerHTML = "";
+
+				// remove all the previous divs and images
+				while (gameDiv.children.length > 0) { 
+					gameDiv.removeChild(gameDiv.children[0]);
+				}
+
+				third.classList.add("hidden");
+				first.classList.remove("hidden");
+			});
+
+			for (var i = 0; i < firstButtons.length; i++) {
+				firstButtons[i].addEventListener('click', function(event) {
+					iconsPerLine = parseInt(event.currentTarget.dataset.width);
+					totalIcons = parseInt(event.currentTarget.dataset.width * event.currentTarget.dataset.height);
+					gameMode = event.currentTarget.dataset.gamemode;
+					correctCountToWin = totalIcons / 2;
+
+					// time stuff 
+					startTime = new Date().getTime();
+					timeElapsed = 0;
+					setTimeout(calculateTimeElapsed, 1000);
+
+					// select which 6 pokemons would be used 
+					while (tokens.length < totalIcons) {
+						// select an item at random from assetsCopy
+						var randNum = parseInt(Math.random() * assetsCopy.length);
+
+						tokens.push(assetsCopy[randNum]);
+						tokens.push(assetsCopy[randNum]);
+
+						assetsCopy.splice(randNum, 1);
+					}
+
+					while (tokens.length > 0) {
+
+						var randNum2 = parseInt(Math.random() * tokens.length);
+
+						var temp = document.createElement("div");
+						temp.style.width = tempSize + "px";
+						temp.style.height = tempSize + "px";
+						temp.style.float = "left";
+						var tempChild = document.createElement("img");
+						tempChild.dataset.pokemon = tokens[randNum2];
+						tempChild.dataset.matched = false;
+						tempChild.src = "images/pokeball.png";
+
+
+						// set up mouse click events 
+						tempChild.addEventListener('click', function(event) {
+
+							// only allow click events if the pokemon had not yet been matched
+							if (event.currentTarget.dataset.matched === "false" && clickable === true) {
+								event.currentTarget.src = "images/" + event.currentTarget.dataset.pokemon;
+								event.currentTarget.width = tempSize;
+
+								// if this is the first click
+								if (firstClicked === false) {
+									firstClicked = true;
+									firstPokemon = event.currentTarget.dataset.pokemon;
+
+									// temporary variable to hold information of first clicked
+									firstClickedTemp = event.currentTarget;
+									firstClickedTemp.dataset.matched = "true";
+								}
+
+								// if this is the second click
+								else if (firstClicked === true) {
+									secondClicked = true;
+									secondPokemon = event.currentTarget.dataset.pokemon;
+
+									// temporary variable to hold information of first clicked
+									secondClickedTemp = event.currentTarget;
+
+									// if the correct match is found
+									if (firstPokemon === secondPokemon) {
+										playSound("images/correct.wav");
+										firstClickedTemp.dataset.matched = "true";
+										secondClickedTemp.dataset.matched = "true";
+										firstClicked = false;
+										secondClicked = false;
+										firstPokemon = "";
+										secondPokemon = "";
+										correctCount++;
+
+										// correctCount = correctCountToWin;
+
+										if (correctCount === correctCountToWin) {
+											setTimeout(hideSecondScreen, 200);
+											setTimeout(showThirdScreen, 250);
+										}
+									}
+
+									// if the correct match is not found
+									else {
+										// reset all data 
+										playSound("images/wrong.wav");
+										firstClicked = false;
+										secondClicked = false;
+										firstPokemon = "";
+										secondPokemon = "";
+										clickable = false;
+										firstClickedTemp.dataset.matched = "false";
+										secondClickedTemp.dataset.matched = "false";
+										setTimeout(backToPokeball, 1000);
+									}
+								}
+							}
+						});
+
+						// add tempChild to temp and add temp to game div
+						temp.appendChild(tempChild);
+						gameDiv.appendChild(temp);
+
+						if (iconsPerLineCounter % iconsPerLine == 0) {
+							temp.style.clear = "both";
+						}
+
+						tokens.splice(randNum2, 1);
+						iconsPerLineCounter++;
+					}
+
+					first.classList.add("hidden");
+					second.classList.remove("hidden");
+				});
+			}
+
+		</script>
+
+		<div id="footer"></div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

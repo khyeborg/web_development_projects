@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Working with the DOM</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+      .tile {
+        width: 98px;
+        box-sizing: border-box;
+        text-align: center;
+        float: left;
+      }
+      .tile img {
+        width: 98px;
+        height: 98px;
+      }
+      .navigation img {
+        width: 10px;
+        height: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Pokemon Reorder</h1>
+
+    <div id="pokemon">
+      <div class="tile">
+        <img src="images/arcanine.png">
+        <div class="navigation">
+          <img class="arrowleft" src="images/arrow-l-black.png">
+          <img class="arrowright" src="images/arrow-r-black.png">
+        </div>
+      </div>
+      <div class="tile">
+        <img src="images/beedrill.png">
+        <div class="navigation">
+          <img class="arrowleft" src="images/arrow-l-black.png">
+          <img class="arrowright" src="images/arrow-r-black.png">
+        </div>
+      </div>
+      <div class="tile">
+        <img src="images/bellsprout.png">
+        <div class="navigation">
+          <img class="arrowleft" src="images/arrow-l-black.png">
+          <img class="arrowright" src="images/arrow-r-black.png">
+        </div>
+      </div>
+      <div class="tile">
+        <img src="images/bulbasaur.png">
+        <div class="navigation">
+          <img class="arrowleft" src="images/arrow-l-black.png">
+          <img class="arrowright" src="images/arrow-r-black.png">
+        </div>
+      </div>
+      <br style="clear: both;">
+    </div>
+
+    <script>
+      // get a reference to all of the right arrow elements on the page
+      var allRightArrows = document.querySelectorAll('.arrowright');
+
+      // visit all of these elements
+      for (var i = 0; i < allRightArrows.length; i++) {
+        // tell each of these elements to listen for clicks
+        allRightArrows[i].onclick = function(event) {
+
+          // now we need to see where we fall in this child list
+          // the right arrow needs to figure out which tile it lives in
+          // we can do this using DOM nodes
+          var myTile = event.currentTarget.parentElement.parentElement;
+
+          // now we need to find the tile directly to our right
+          var tileToTheRight = myTile.nextElementSibling;
+
+          // if we are not the last tile we can move
+          if (tileToTheRight.classList.contains('tile')) {
+            myTile.parentElement.insertBefore(tileToTheRight, myTile);
+          }
+        }
+      }
+
+
+      // same for the left arrows
+      // get a reference to all of the left arrow elements on the page
+      var allLeftArrows = document.querySelectorAll('.arrowleft');
+
+      // visit all of these elements
+      for (var i = 0; i < allLeftArrows.length; i++) {
+        // tell each of these elements to listen for clicks
+        allLeftArrows[i].onclick = function(event) {
+
+          // now we need to see where we fall in this child list
+          // the left arrow needs to figure out which tile it lives in
+          // we can do this using DOM nodes
+          var myTile = event.currentTarget.parentElement.parentElement;
+
+          // now we need to find the tile directly to our left
+          var tileToTheLeft = myTile.previousElementSibling;
+
+          // if we are not the first tile we can move
+          if (tileToTheLeft != null) {
+            myTile.parentElement.insertBefore(myTile, tileToTheLeft);
+          }
+        }
+      }
+
+    </script>
+
+  </body>
+</html>

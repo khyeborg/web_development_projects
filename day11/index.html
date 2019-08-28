@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+			.hidden {
+				display: none;
+			}
+
+			/* img {
+				position: absolute;
+				left: 0px;
+			} */
+
+			img {
+				width: 100px;
+			}
+
+			#container {
+				position: relative;
+				border: 1px solid black;
+				width: 500px;
+				height: 500px;
+				overflow: hidden;
+			}
+
+			.mover {
+				position: absolute;
+			}
+
+			
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<!--<h1>Empty example</h1>
+
+		<img src="images/pikachu.png"> -->
+		<!-- <img src="images/present.svg">
+
+		<audio>
+			<source src="images/drumroll.wav" type="audio/wav">
+		</audio> -->
+
+		<!-- <div id="container">
+			<img class="mover" src="images/pikachu.png" data-x="0" data-y="0" data-speed="2">
+			<img class="mover" src="images/charmander.png" data-x="0" data-y="150" data-speed="5">
+			<img class="mover" src="images/bulbasaur.png" data-x="0" data-y="350" data-speed="7">
+		</div> -->
+
+		<!-- <h1 id="foo">Click Me</h1> -->
+
+		<form>
+			<select id="color">
+				<option value="yellow">Yellow</option>
+				<option value="pink">Pink</option>
+				<option value="blue">Blue</option>
+			</select>
+
+			<input type="password" id="pokemon">
+			<div id="result"></div>
+		</form>
+
+
+		
+
+		<script>
+			document.querySelector('body').style.backgroundColor = document.getElementById('color').value;
+
+			document.getElementById('color').addEventListener('change', function(event) {
+				console.log(event.currentTarget.value);
+				document.querySelector('body').style.backgroundColor = event.currentTarget.value;
+			}); // respond to the change event with a function, doesn't matter if you change it using mouse or whatever
+
+			document.getElementById('pokemon').addEventListener('keypress', function(event) {
+				document.getElementById('result').innerHTML += event.key;
+				console.log(event.key);
+			});
+
+			/*
+			// this is a better way to have it respond two things at one click, this example is okay, but sometimes it can be useful
+			var foo = document.getElementById('foo');
+
+			// note that there is no "on" word anymore
+			foo.addEventListener('click', function(event) {
+				event.currentTarget.style.color = "yellow";
+			});
+
+			foo.addEventListener('click', function(event) {
+				event.currentTarget.style.backgroundColor = "blue";
+			});
+
+			console.dir(foo);
+			console.log(foo);
+			*/
+
+			/*foo.onclick = function(event) {
+				event.currentTarget.style.color = "yellow";
+			}
+
+			foo.onclick = function(event) {
+				event.currentTarget.style.backgroudColor = "blue";
+			}*/
+
+			/*document.getElementById('container').onclick = function(event) {
+				var newCreature = document.createElement('img');
+				newCreature.src = "images/eevee.png";
+				newCreature.classList.add("mover");
+				newCreature.dataset.x = event.offsetX;
+				newCreature.dataset.y = event.offsetY;
+				newCreature.dataset.speed = parseInt(Math.random() * 10 + 2);
+				event.currentTarget.appendChild(newCreature);
+				newCreature.style.left = event.offsetX + "px";
+				newCreature.style.top = event.offsetY + "px";
+			}
+ 
+			function moveCreatures() {
+				// get a ref to all Creatures
+				var allCreatures = document.querySelectorAll(".mover");
+				for (var i = 0; i < allCreatures.length; i++) {
+					// tell the creature to update its x and y position
+					allCreatures[i].dataset.x = parseInt(allCreatures[i].dataset.x) + parseInt(allCreatures[i].dataset.speed);
+
+					if (parseInt(allCreatures[i].dataset.x) > 500) {
+						allCreatures[i].dataset.x = "-150";
+					}
+
+					// update the CSS on the element
+					allCreatures[i].style.left = allCreatures[i].dataset.x + "px";
+					allCreatures[i].style.top = allCreatures[i].dataset.y + "px";
+				}
+				setTimeout(moveCreatures, 25);
+			}
+
+			setTimeout(moveCreatures, 25);
+			*/
+
+			/*
+			var present = document.querySelector('img');
+			present.onclick = function(event) {
+				document.querySelector('h1').innerHTML = "what's inside?";
+				document.querySelector('audio').play(); // stop, rewind... 
+				setTimeout(openPresent, 4000); // openPresent can be replaced with the actual function
+			}
+
+			function openPresent() {
+				present.src = "images/pikachu.png";
+				document.querySelector('h1').innerHTML = "It's a pikachu!";
+			}
+			*/
+
+
+			/*
+			// not a valid way to do animation
+			var pika = document.querySelector('img');
+			var x = 0;
+			// var y = 0;
+
+			function movePikachu() {
+				x += 1;
+				// y += 1;
+				pika.style.left = x + 'px';
+				// pika.style.top = y + 'px';
+
+				setTimeout(movePikachu, 5);
+			}
+
+			movePikachu();
+			*/
+
+			// invalid way to animate
+			/* for (var x = 0; x < 500; x++) {
+				pika.style.left = x + 'px';
+			} */
+
+
+			/*
+			function foo() {
+				console.log("foo was called", Math.random());
+			}
+
+			foo();
+			setTimeout(foo, 5000) // takes two arguments, argument 1: a function, argument 2: a number set in milliseconds, 5000ms - 5s
+			*/
+
+			/*
+			// two ways to store a function
+			function foo() {
+				console.log("this is foo");
+			}
+
+			var x = foo;
+
+			foo();
+			x();
+
+			var y = function() { // anonymous function
+				console.log("this is the 1st function");
+			}
+
+			y();
+			*/
+			/*
+			var x = function() { 
+				console.log("this is the 1st function");
+			}
+
+			var y = function() { 
+				console.log("this is the 2nd function");
+			}
+
+			function foo(a, b) {
+				a();
+				b();
+			}
+
+			foo(x, y);
+			*/
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

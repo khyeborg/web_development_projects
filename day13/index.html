@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Day 16</title>
+		<meta charset="utf-8">
+
+		<style>
+			.hidden {
+				display: none;
+			}
+			
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<h1>Day 16</h1>
+
+		<ul>
+			<li>a</li>
+			<li>a</li>
+			<li>a</li>
+			<li>a</li>
+			<li>a</li>
+		</ul>
+
+		<script src="js/jquery-3.3.1.min.js"></script>
+
+		<script>
+
+			$(document).ready(function() {
+
+				// document.querySelector('h1').style.backgroundColor = 'yellow';
+				$("h1").css('background-color', 'yellow');
+
+				$("li").css('background-color', 'pink');
+
+				$("h1").click(function(event) {
+					console.log("you clicked me");
+					// $("h1").hide();
+					$("ul").toggle();
+				});
+			});
+
+			/*console.log("I'm here");
+
+			window.localStorage.setItem('pokemon', 'pikachu'); // always a string!!! 
+
+			// get an item from loaclStorage
+			var something = window.localStorage.getItem('pokemon');
+			console.log("got this from local stroage:", something);
+
+			// setItem, put something into the key
+			// getItem, get something from the key
+
+			// local storage: user and other people on one device
+			// cookies - server*/
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Day 14</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <h1>Day 14</h1>
+    <div id="bank">
+      <span id="caption">Your bank amount:</span>
+      <span id="amount"></span>
+    </div>
+    <button id="add">Add $</button>
+    <button id="remove">Remove $</button>
+
+    <script type="text/javascript">
+
+        // minified using: https://www.minifier.org/
+        var bankAmount=50;document.getElementById('amount').innerHTML=bankAmount;document.getElementById('add').addEventListener('click',function(event){bankAmount+=10;document.getElementById('amount').innerHTML=bankAmount});document.getElementById('remove').addEventListener('click',function(event){if(bankAmount>=10){bankAmount-=10;document.getElementById('amount').innerHTML=bankAmount}})
+
+    </script>
+  </body>
+</html>

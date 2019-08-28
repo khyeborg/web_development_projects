@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Assigment 02</title>
+		<meta charset="utf-8"/>
+
+		<style>
+
+			#main {
+				margin: auto;
+				position: relative;
+				width: 900px;
+				height: 600px;
+				background-color: #EFEEED;
+				padding-top: 10px;
+				line-height: 1.5;
+			}
+
+			h1 {
+				text-align: center;
+				font-family: helvetica;
+				font-size: 250%;
+				font-weight: bold;
+			}
+
+			p {
+				margin: 0px;
+			}
+
+			.green {
+				width: 700px;
+				position: relative;
+				left: 90px;
+				background-color: #D4FECE;
+				padding: 10px;
+				font-family: helvetica;
+				border-radius: 10px;
+			}
+
+			#one {
+				top: 0px;
+			}
+
+			#two {
+				top: 15px;
+			}
+
+			#three {
+				top: 30px;
+				height: 170px;
+			}
+
+			#four {
+				top: 45px;
+				height: 50px;
+				padding: 0px;
+				padding-top: 10px;
+				padding-left: 10px;
+			}
+
+			#die_div {
+				position: absolute;
+				left: 500px;
+			}
+
+			#even_button {
+				position: absolute;
+				left: 506px;
+				top: 140px;
+			}
+
+			#odd_button {
+				position: absolute;
+				left: 556px;
+				top: 140px;
+			}
+
+			#play_again_button {
+				position: absolute;
+				left: 510px;
+				top: 140px;
+			}
+
+			#record_button {
+				position: absolute;
+				left: 600px;
+				top: 10px;
+			}
+
+			.hidden {
+				display: none;
+			}
+
+			.buttons:hover {
+				background-color: #ABADB0;
+			}
+
+			#result_statement {
+				position: relative;
+				width: 250px;
+				margin: 0px;
+				float:left;
+
+			}
+
+			#game_over {
+				position: absolute;
+				left: 240px;
+				top: 140px;
+			}
+
+			#extra_buttons {
+				position: absolute;
+				top: 160px;
+				left: 410px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="main">
+			<h1>Guess The Number!</h1>
+			<div class="green" id="one">Guess the Number is a game of chance that involves absolutely no skill. In this game the computer will roll a 6 sided die. Your job is to predict whether an EVEN or an ODD number will be rolled. Each guess costs $10, and you start the game with $50. If you guess incorrectly you will lose your $10 bet, but if you guess correctly you will win $10. The game ends when you run out of money, or when you choose to leave this webpage!</div>
+			<div class="green" id="two">Your bank: $<span id="current_bank"></span></div>
+			<div class="green" id="three">
+				<p>Game Result</p>
+				<div class="hidden" id="result_statement">You chose <span id="even_odd"></span> - you <span id="win_lose"></span>!</div>
+				<div id="die_div"><img src="images/dice-unknown.png"></div>
+				<button class="buttons" id="even_button">EVEN</button>
+				<button class="buttons" id="odd_button">ODD</button>
+
+				<div id="extra_buttons">
+					<button class="buttons extra">ONE</button>
+					<button class="buttons extra">TWO</button>
+					<button class="buttons extra">THREE</button>
+					<button class="buttons extra">FOUR</button>
+					<button class="buttons extra">FIVE</button>
+					<button class="buttons extra">SIX</button>
+				</div>
+
+				<button class="buttons hidden" id="play_again_button">PLAY AGAIN</button>
+				<div class="hidden" id="game_over">OUT OF MONEY... YOU MADE PIKACHU CRY - GAME OVER :(</div>
+			</div>
+			<div class="green" id="four">
+				Result history:<br> 
+				<span id="record"></span>
+				<button class="buttons" id="record_button">CLEAR HISTORY</button>
+			</div>
+		</div>
+
+		<script>
+
+			// declare variables
+			var bank = 50;
+			var evenOddChoice = "";
+			var winLose = "";
+			var rollHistory = [];
+			var userChoiceHistory = [];
+			var winLoseHistory = [];
+
+			// get references
+			var oddButton = document.getElementById("odd_button");
+			var evenButton = document.getElementById("even_button");
+			var playAgainButton = document.getElementById("play_again_button");
+			var imageContainer = document.querySelector("img");
+			var results = document.getElementById("result_statement");
+			var gameOver = document.getElementById("game_over");
+			var record = document.getElementById("record");
+			var mainDiv = document.getElementById("main");
+			var recordDiv = document.getElementById("four");
+			var recordButton = document.getElementById("record_button");
+			var extraDiv = document.getElementById("extra_buttons");
+			var extraArray = document.getElementsByClassName("extra");
+
+			// dynamic height adjustment
+			mainDiv.style.height = "600px";
+			recordDiv.style.height = "50px";
+			var mainDivHeight = 605;
+			var recordDivHeight = 50;
+
+			updateBank();
+
+			evenButton.onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "EVEN"; userChoiceHistory.push("EVEN");
+
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				// results
+				if (num % 2 != 0) {
+					bank -= 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1)}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(2)}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(3)}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				else {
+					bank += 10;
+					if      (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2)}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4)}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6)}
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			oddButton.onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "ODD"; userChoiceHistory.push("ODD");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num % 2 != 0) {
+					bank += 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1)}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(2)}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(3)}
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2)}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4)}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6)}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			playAgainButton.onclick = function() {
+				// change the die picture
+				imageContainer.src = "images/dice-unknown.png";
+
+				// hide and show stuff 
+				evenButton.classList.remove("hidden");
+				oddButton.classList.remove("hidden");
+				extraDiv.classList.remove("hidden");
+				playAgainButton.classList.add("hidden");
+				results.classList.add("hidden");
+			}
+
+			// one button
+			extraArray[0].onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "ONE"; userChoiceHistory.push("ONE");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num == 1) {
+					bank += 60;
+					imageContainer.src = "images/dice-1.png";
+					rollHistory.push(1);
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2);}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(3);}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4);}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(5);}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6);}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			// two button
+			extraArray[1].onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "TWO"; userChoiceHistory.push("TWO");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num == 2) {
+					bank += 60;
+					imageContainer.src = "images/dice-2.png";
+					rollHistory.push(2);
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1);}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(3);}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4);}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(5);}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6);}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			// three button
+			extraArray[2].onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "THREE"; userChoiceHistory.push("THREE");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num == 3) {
+					bank += 60;
+					imageContainer.src = "images/dice-3.png";
+					rollHistory.push(3);
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1);}
+					else if (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2);}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4);}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(5);}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6);}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			// four button
+			extraArray[3].onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "FOUR"; userChoiceHistory.push("FOUR");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num == 4) {
+					bank += 60;
+					imageContainer.src = "images/dice-4.png";
+					rollHistory.push(4);
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1);}
+					else if (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2);}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(3);}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(5);}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6);}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			// five button
+			extraArray[4].onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "FIVE"; userChoiceHistory.push("FIVE");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num == 5) {
+					bank += 60;
+					imageContainer.src = "images/dice-5.png";
+					rollHistory.push(5);
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1);}
+					else if (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2);}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(3);}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4);}
+					else if (num == 6) {imageContainer.src = "images/dice-6.png"; rollHistory.push(6);}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			// six button
+			extraArray[5].onclick = function() {
+				// assign odd to evenOddChoice 
+				evenOddChoice = "SIX"; userChoiceHistory.push("SIX");
+				
+				// generate a random number between 1 and 6 
+				var num = parseInt(Math.random() * 6) + 1;
+
+				if (num == 6) {
+					bank += 60;
+					imageContainer.src = "images/dice-6.png";
+					rollHistory.push(6);
+					winLose = "WIN"; winLoseHistory.push("WIN");
+				}
+
+				else {
+					bank -= 10;
+					if      (num == 1) {imageContainer.src = "images/dice-1.png"; rollHistory.push(1);}
+					else if (num == 2) {imageContainer.src = "images/dice-2.png"; rollHistory.push(2);}
+					else if (num == 3) {imageContainer.src = "images/dice-3.png"; rollHistory.push(3);}
+					else if (num == 4) {imageContainer.src = "images/dice-4.png"; rollHistory.push(4);}
+					else if (num == 5) {imageContainer.src = "images/dice-5.png"; rollHistory.push(5);}
+					winLose = "LOSE"; winLoseHistory.push("LOSE");
+				}
+
+				// hide and show stuff 
+				evenButton.classList.add("hidden");
+				oddButton.classList.add("hidden");
+				extraDiv.classList.add("hidden");
+				playAgainButton.classList.remove("hidden");
+				results.classList.remove("hidden");
+
+				updateBank();
+				updateRecord();
+			}
+
+			recordButton.onclick = function() {
+				while (rollHistory.length > 0)       {rollHistory.splice(0,1);}
+				while (userChoiceHistory.length > 0) {userChoiceHistory.splice(0,1);}
+				while (winLoseHistory.length > 0)    {winLoseHistory.splice(0,1);}
+				updateRecord();
+			}
+
+			function updateBank() {
+				var bankElement = document.getElementById("current_bank");
+				var evenOddChoiceElement = document.getElementById("even_odd");
+				var winLoseElement = document.getElementById("win_lose");
+
+				bankElement.innerHTML = bank;
+				evenOddChoiceElement.innerHTML = evenOddChoice;
+				winLoseElement.innerHTML = winLose;
+
+				// if you lose all money :(
+				if (bank == 0) {
+					evenButton.classList.add("hidden");
+					oddButton.classList.add("hidden");
+					playAgainButton.classList.add("hidden");
+					gameOver.classList.remove("hidden");
+
+					imageContainer.src = "images/sad_pikachu.png";
+				}
+			}
+
+			function updateRecord() {
+				record.innerHTML = "";
+				for (var i = rollHistory.length - 1; i >= 0; i--) {
+					record.innerHTML += rollHistory[i] + " ";
+					record.innerHTML += userChoiceHistory[i] + " ";
+					record.innerHTML += winLoseHistory[i] + " ";
+					if (i == rollHistory.length - 1) {record.innerHTML += " - MOST RECENT ROLL";}
+					record.innerHTML += "<br>";
+				}
+
+				// dynamic height adjustment
+				var newMainDivHeight = mainDivHeight + rollHistory.length * 23.9;
+				var newRecordDivHeight = recordDivHeight + rollHistory.length * 23.9;
+				mainDiv.style.height = newMainDivHeight + "px";
+				recordDiv.style.height = newRecordDivHeight + "px";
+			}
+
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

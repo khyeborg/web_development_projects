@@ -1,0 +1,23 @@
+h1 {
+	font-family: fantasy;
+	background-color: blue;
+	color: #ffffff; 
+	color: rgb(255, 255, 0);
+}
+
+.pikachu { /* class */
+	background-color: yellow;
+}
+
+#squirtle { /* id */
+	background-color: blue
+}
+
+.chansey {
+	color: pink;
+	background-color: green;
+}
+
+h1:hover { /* pseudoselectors */
+	background-color: yellow;
+}

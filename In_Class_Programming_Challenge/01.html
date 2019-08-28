@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Challenge #</title>
+    <style type="text/css">
+      body {
+        font-family: sans-serif;
+      }
+
+
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Challenge #1</h1>
+
+    <!-- Voldemorte has enchanted the following block of HTML and messed it up!
+         You are NOT allowed to directly manipulate HTML code from here until the next comment tag.
+         Instead, you need to fix the content using JavaScript (see below) -->
+    <div id="container">
+      <p id="intro"><span>Magical Beastiary of Northern England</span></p>
+      <ul>
+        <li id="one">Voldemorte was here!</li>
+        <li id="two">Expecto messup-o!</li>
+        <li id="three">Honk if you love horcruxes!</li>
+      </ul>
+      <p id="conclusion">
+        There are many beasts here in England, as you can see!  In addition, <span>Hagrid Stinks! and</span> they can be very dangerous.
+      </p>
+      <p id="output"></p>
+    </div>
+    <!-- end messed up block of HTML code -->
+
+
+
+    <script type="text/javascript">
+
+      // your task is to cast a JavaScript spell to fix the page so that it contains the following content
+      // 1. Magical Beastiary of Northern England (should be rendered using font-size 200%)
+      // 2. Replace "Voldemorte was here!" with the text "Centaurs"
+      // 3. "Centaurs" should be rendered using a "green" font color
+      // 4. Replace "Expector messup-o!" with "Goblins"
+      // 5. Replace "Honk if you love horcruxes!" with "Griffins"
+      // 6. Remove the text "Hagrid stinks!" from the <span> tag. Ensure that the <span> tag remains after you remove the text from it.
+
+      var fixOne = document.getElementById("intro");
+      fixOne.style["font-size"] = "200%";
+
+      var fixTwo = document.getElementById("one");
+      fixTwo.innerHTML = "Centaurs";
+      fixTwo.style["color"] = "green";
+
+      var fixFour = document.getElementById("two");
+      fixFour.innerHTML = "Goblins";
+
+      var fixFive = document.getElementById("three");
+      fixFive.innerHTML = "Griffins";
+
+      var fixSix = document.querySelector("#conclusion span");
+      fixSix.innerHTML = "";
+
+      // to test your work call the 'magic()' function
+      magic(); // Image: star, Password: Alohamora
+
+      function magic() {
+        var _0x35e3=['b3V0cHV0','Z2V0RWxlbWVudEJ5SWQ=','aW50cm8=','c3R5bGU=','Zm9udC1zaXpl','MjAwJQ==','Rm9udCBzaXplIGNvcnJlY3QhPGJyPg==','Q2VudGF1cnM=','Q2VudGF1cnMgY29ycmVjdCE8YnI+','Y29sb3I=','Z3JlZW4=','R3JlZW4gY29sb3IgY29ycmVjdCE8YnI+','dHdv','aW5uZXJIVE1M','R29ibGlucw==','R29ibGlucyBjb3JyZWN0ITxicj4=','cXVlcnlTZWxlY3Rvcg==','I2NvbmNsdXNpb24gc3Bhbg==','PGltZyBzcmM9ImltYWdlcy9zdGFyLmdpZiI+'];(function(_0x46a91d,_0x2203ff){var _0x5c1b75=function(_0x1c7280){while(--_0x1c7280){_0x46a91d['push'](_0x46a91d['shift']());}};_0x5c1b75(++_0x2203ff);}(_0x35e3,0x157));var _0x50a9=function(_0x2545ad,_0x2bc032){_0x2545ad=_0x2545ad-0x0;var _0x7a23ca=_0x35e3[_0x2545ad];if(_0x50a9['initialized']===undefined){(function(){var _0x19d11e;try{var _0x3e1206=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');_0x19d11e=_0x3e1206();}catch(_0x245b6f){_0x19d11e=window;}var _0x3e74b9='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x19d11e['atob']||(_0x19d11e['atob']=function(_0x1b5a9e){var _0x5790df=String(_0x1b5a9e)['replace'](/=+$/,'');for(var _0x187843=0x0,_0xb49390,_0x3b4f0f,_0x41033a=0x0,_0xbe5042='';_0x3b4f0f=_0x5790df['charAt'](_0x41033a++);~_0x3b4f0f&&(_0xb49390=_0x187843%0x4?_0xb49390*0x40+_0x3b4f0f:_0x3b4f0f,_0x187843++%0x4)?_0xbe5042+=String['fromCharCode'](0xff&_0xb49390>>(-0x2*_0x187843&0x6)):0x0){_0x3b4f0f=_0x3e74b9['indexOf'](_0x3b4f0f);}return _0xbe5042;});}());_0x50a9['base64DecodeUnicode']=function(_0x3b3d6c){var _0x384ba6=atob(_0x3b3d6c);var _0x1a7d79=[];for(var _0x359e05=0x0,_0x256e4d=_0x384ba6['length'];_0x359e05<_0x256e4d;_0x359e05++){_0x1a7d79+='%'+('00'+_0x384ba6['charCodeAt'](_0x359e05)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x1a7d79);};_0x50a9['data']={};_0x50a9['initialized']=!![];}var _0x3feee5=_0x50a9['data'][_0x2545ad];if(_0x3feee5===undefined){_0x7a23ca=_0x50a9['base64DecodeUnicode'](_0x7a23ca);_0x50a9['data'][_0x2545ad]=_0x7a23ca;}else{_0x7a23ca=_0x3feee5;}return _0x7a23ca;};var points=0x0;var log='';if(document[_0x50a9('0x0')](_0x50a9('0x1'))[_0x50a9('0x2')][_0x50a9('0x3')]==_0x50a9('0x4')){points++;log+=_0x50a9('0x5');}if(document[_0x50a9('0x0')]('one')['innerHTML']==_0x50a9('0x6')){points++;log+=_0x50a9('0x7');}if(document[_0x50a9('0x0')]('one')[_0x50a9('0x2')][_0x50a9('0x8')]==_0x50a9('0x9')){points++;log+=_0x50a9('0xa');}if(document[_0x50a9('0x0')](_0x50a9('0xb'))[_0x50a9('0xc')]==_0x50a9('0xd')){points++;log+=_0x50a9('0xe');}if(document[_0x50a9('0xf')](_0x50a9('0x10'))[_0x50a9('0xc')]==''){points++;log+='Remove\x20Hagrid\x20stinks!\x20correct!<br>';}if(points==0x5){log+='<br>You\x20solved\x20the\x20challenge!\x20Go\x20back\x20to\x20the\x20class\x20website\x20and\x20claim\x20your\x20prize!';log+=_0x50a9('0x11');}document[_0x50a9('0x0')](_0x50a9('0x12'))['innerHTML']=log;
+      }
+
+    </script>
+
+
+  </body>
+</html>

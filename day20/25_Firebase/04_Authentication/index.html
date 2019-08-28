@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Development</title>
+    <style>
+      #logout {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Authentication</h1>
+
+    <div id="result"></div>
+
+    <button id="login">Log in</button>
+    <button id="logout">Log Out</button>
+
+    <!-- note: this code is supplied by Firebase - you can obtain your own code to paste here
+         by doing the following:
+
+         1. Visit https://firebase.google.com/ and click 'Get Started'
+         2. Sign in using your Google Account
+         3. Click 'Add a Project'
+         4. Give your project a name and click 'create'
+         5. Click 'Add Firebase to your web app'
+         6. Give your app a name and click Save - copy the code that appears
+    -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "",
+        authDomain: "",
+        databaseURL: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: ""
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Initialize Database
+      var db = firebase.firestore();
+
+      // Initialize authentication provider
+
+    </script>
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!-- custom code goes here -->
+    <script>
+
+      $(document).ready(function() {
+
+        // some DOM references
+        result = document.getElementById('result');
+        login = document.getElementById('login');
+        logout = document.getElementById('logout');
+
+        // global variable to hold onto the user's login information
+        var user_info;
+
+        // when the user clicks the login button
+        login.onclick = function(event) {
+
+          // handle login
+          console.log("logging in");
+
+          // setup a new auth provider object
+          var provider = new firebase.auth.GoogleAuthProvider();
+          provider.setCustomParameters({
+            prompt: 'select_account'
+          });
+
+          // authenticate
+          firebase.auth().signInWithPopup(provider).then(function(result) {
+            console.log("authentication was successful");
+          }).catch(function(error) {
+            console.log("an error occurred");
+          });
+        }
+
+        // this function will trigger when the authenitcation state changes
+        firebase.auth().onAuthStateChanged(function(user) {
+          console.log(user);
+
+          // user just logged in
+  			  if (user) {
+  			    // User is signed in.
+  			    user_info = user;
+
+            // hide the login button
+            login.style.display = 'none';
+            logout.style.display = 'block';
+
+            // give them some kind of feedback
+            result.innerHTML = 'You are logged in as ' + user_info.email;
+          }
+
+          // user just logged out
+          else {
+            user_info = false;
+
+            // hide the logout button
+            logout.style.display = 'none';
+            login.style.display = 'block';
+          }
+
+        });
+
+        // logout button
+        logout.onclick = function(event) {
+
+          // sign the user out
+    			firebase.auth().signOut().then(function() {
+            // give them some kind of feedback
+            result.innerHTML = 'You have been logged out';
+          });
+
+        }
+
+
+      }); // end jQuery ready function
+
+
+
+    </script>
+
+  </body>
+</html>

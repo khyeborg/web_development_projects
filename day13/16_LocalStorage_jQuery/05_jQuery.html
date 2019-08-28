@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Day 16</title>
+    <meta charset="utf-8">
+    <style>
+      .red {
+        background-color: red;
+        color: white;
+      }
+      .big {
+        font-size: 200%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Day 16</h1>
+
+    <button id="button1">Click to toggle div5</button>
+
+    <p id="p1" class="big">This is paragraph #1</p>
+
+    <div id="div1">
+      <a href="#">This is a link</a>
+      <a href="#">This is a link</a>
+      <a href="#">This is a link</a>
+      <a href="#">This is a link</a>
+      <a href="#">This is a link</a>
+      <a href="#">This is a link</a>
+    </div>
+
+    <div id="div2">This is div 2</div>
+
+    <div id="div3">This is div 3</div>
+
+    <div id="div4">This is div 4</div>
+
+    <div id="div5">This is div 5</div>
+
+    <!-- jQuery library must be included in order to use jQuery
+         in general, we link this library at the bottom of our code -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+    <!-- now we can write our application code using jQuery -->
+    <script type="text/javascript">
+
+      // jQuery works best when wrapped within a 'ready' event - this ensures
+      // that the DOM is ready to go before we go ahead and manipulate inspect
+      $(document).ready(function() {
+
+        // all application code goes in here
+
+        // jQuery can simplify tasks that you normally perform in 'vanilla' javascript
+        // there's no need to use jQuery other than as a 'helper' - there's nothing you
+        // can't do in jQuery that you can't do with regular JS
+
+        // you can start using jQuery by getting a reference to the elements you wish
+        // to work with.  you do this using the $() function.  think of this like
+        // querySelectorAll.  For example, if we want to get a reference to the 'p'
+        // tag with an id of 'p1' and change its border we can do the following:
+        $('#p1').css('border', '1px solid black');
+
+        // unlike vanilla JS, you can select multiple elements and apply styles to them
+        // without a loop.  For example:
+        $('#div1 a').css('border', '1px solid black');
+        $('#div1 a').css('background-color', 'yellow');
+
+        // you can change HTML attributes using the 'attr' method, like this:
+        $('#div1 a').attr('target', '_blank');
+
+        // you can get CSS and HTML attribute values by using the same functions, like this:
+        console.log( $('#div1 a').attr('target') );
+        console.log( $('#p1').css('border') );
+
+        // you can adjust the HTML of an element as well:
+        $('#p1').html("just updated the HTML here");
+        console.log( $('#p1').html() ); // returns the HTML text
+
+        // you can also easily access and set data properties on an element
+        // note that this doesn't actually change the element - it uses jQuery to store
+        // the data property, which makes this more compatible with older browsers that
+        // don't support the 'dataset' system
+        $('#p1').data('name', 'pikachu');
+        console.log( $('#p1').data('name') );
+        console.log( $('#p1') );
+
+        // you can also apply classes to an element as you would in regular JS
+        $('#p1').addClass('red');
+        console.log( $('#p1').hasClass('red') ); // true
+        $('#p1').removeClass('red');
+        $('#p1').toggleClass('red');
+
+        // you can have an element listen for clicks using the 'click' function - this takes one
+        // argument - a function to run when the click event is detected
+        $('#div2').click(function(event) {
+
+          // to access the element that was clicked you can use the keyword 'this'
+          // this gives you access to the JQuery element
+          // $(this) === $('#div2') in this case
+          $(this).css('background-color', 'yellow');
+
+          // you can also use 'event.currentTarget' here to access the JS DOM element
+          // without jQuery (as you would in vanilla JS)
+          console.log( event.currentTarget );
+        });
+
+        // all standard JS events have jQuery analogs
+        // for example:
+        $('#div3').mouseover(function(event) {
+          $(this).css('background-color', 'blue');
+        });
+        $('#div3').mouseout(function(event) {
+          $(this).css('background-color', 'white');
+        });
+
+        // jQuery has a built in 'hover' function to handle both of these behaviors
+        // at the same time.  For example:
+        $('#div4').hover(
+
+          // function to run when the hover starts
+          function(event) {
+            $(this).css('background-color', 'blue');
+          },
+
+          // function to run when the hover ends
+          function(event) {
+            $(this).css('background-color', 'white');
+          }
+
+        );
+
+        // there are some helper functions built into jQuery to perform common tasks
+        // for example to 'hide' visibility of an element you can use the 'hide' function
+        // and you can show an element using the 'show' function.  you can toggle
+        // between hide and show using 'toggle'
+        $('#button1').click(function(event) {
+          $('#div5').toggle();
+        });
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+			.hidden {
+				display: none;
+			}
+
+			#container {
+		        text-align: center;
+		    }
+		      #results {
+		        padding: 25px;
+		        text-align: center;
+		    }
+
+			
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<!-- <img src="images/pikachu.png" title="pikachu the pokemon"> title will show small text box when hover over -->
+		<!-- <img src="images/pikachu.png" data-myname="pikachu">
+		<img src="images/jigglypuff.png" data-myname="jigglypuff"> -->
+
+		<!-- <h1>Image Gallery</h1>
+
+	    <div id="container">
+	      <img src="images/hawaii_small.jpg" data-bigimage="images/hawaii.jpg" data-info="A relaxing afternoon sipping coconut milk on the beach in Hawaii">
+	      <img src="images/pyramid_small.jpg" data-bigimage="images/pyramid.jpg" data-info="Coming at you live from the Great Pyramids of Giza!">
+	      <img src="images/mallorca_small.jpg" data-bigimage="images/mallorca.jpg" data-info="Morning over the Mediterranean">
+	      <img src="images/pikachu.png" data-bigimage="images/hawaii.jpg" data-info="pika pika!">
+	       <img src="images/jigglypuff.png" data-bigimage="" data-info="jiggly!">
+	    </div>
+
+	    <div id="results">
+	      <div id="caption"></div>
+	      <div id="counter"></div>
+	      <div id="bigimage"></div>
+	    </div> -->
+
+	    <!-- <hr> hr tag means horizontal rules, gives a lien break-->
+
+	    <h1>Rollover Images</h1>
+
+	    <div id="container">
+	      <!-- icons designed by: https://www.flaticon.com/packs/pokemon-go -->
+	      <img src="images/pokeball.png" data-rolloverimage="images/bulbasaur.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/charmander.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/eevee.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/jigglypuff.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/pikachu.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/psyduck.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/snorlax.png" data-normalimage="images/pokeball.png">
+	      <img src="images/pokeball.png" data-rolloverimage="images/squirtle.png" data-normalimage="images/pokeball.png">
+	    </div>
+
+		
+
+		<script>
+
+			/*
+			var allTabs = document.querySelectorAll(".tab");
+			for (var i = 0; i < allTabs.length; i++) {
+				allTabs[i].onclick = function(event) {
+					// ohter tabs must be inactive
+					document.querySelector('.active').classList.remove('active');
+
+					// this tab must become active
+					this.classList.add('active');
+
+					var allContent = document.querySelector('#content div');
+					for (var j = 0; j < allContent.length; j++) {
+						allContent[j].classList.add('hidden');
+					}
+
+					// show this tab's content
+					var id = this.dataset.mycontentpanel;
+					document.querySelector(id).classList.remove('hidden');
+				}
+			}
+			*/
+
+			/*
+			var allImages = document.querySelectorAll('img');
+			for (var i = 0; i < allImages.length; i++) {
+				allImages[i].onmouseover = function(event) {
+					this.src = this.dataset.rolloverimage;
+				}
+			}
+
+			for (var i = 0; i < allImages.length; i++) {
+				allImages[i].onmouseout = function(event) {
+					this.src = this.dataset.normalimage;
+				}
+			}
+			*/
+
+			/*
+			// get a ref to all images
+			var allImages = document.querySelectorAll('img');
+
+			// visit all images
+			for (var i = 0; i < allImages.length; i++) {
+				allImages[i].onclick = function(event) {
+
+					// see if this element has a 'counter' meta data element
+					if (!this.dataset.counter) {
+						this.dataset.counter = 1;
+					}
+					else {
+						this.dataset.counter++;
+					}
+
+					document.getElementById('counter').innerHTML = this.dataset.counter;
+
+					// extract the caption
+					var caption = event.currentTarget.dataset.info;
+
+					// extract the caption
+					document.getElementById('caption').innerHTML = caption;
+
+					// extract big image from element 
+					var bigImageFileName = event.currentTarget.dataset.bigimage;
+
+					// if the bigimage container has a child, remove it
+					var bigImageContainer = document.getElementById('bigimage');
+					if (bigImageContainer.children.length > 0) {
+						bigImageContainer.removeChild(bigImageContainer.children[0]);
+					}
+
+					// make a new image tag to hold this image 
+					var newImage = document.createElement('img');
+					newImage.src = bigImageFileName;
+					document.getElementById('bigimage').appendChild(newImage);
+				}
+			}
+			*/
+			
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

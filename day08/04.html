@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Challenge!</title>
+  <style type="text/css">
+    div { border: 1px solid black; margin-bottom: 20px; }
+  </style>
+ </head>
+ <body>
+  <h1>Challenge!</h1>
+  <div>
+    <p>First div p1</p>
+  </div>
+  <div>
+    <p>Second div p1</p>
+    <p>Second div p2</p>
+  </div>
+  <div>
+    <p>Third <strong>div</strong> p1</p>
+    <p>Third div p2</p>
+  </div>
+
+  <script>
+   
+    var star = document.createElement("img");
+    star.src = "images/star.png";
+    
+    // first
+    //document.querySelector("div").appendChild(star);
+    
+    // second
+    /* var div = document.querySelector("div");
+    div.insertBefore(star, document.querySelector("div").firstElementChild); // cleaner
+    document.querySelector("div").insertBefore(star, document.querySelector("div").firstElementChild); // insert before the firstElementChild */
+    
+    // third
+    /* var div2 = document.querySelector("body").children[2];
+    div2.appendChild(star); */
+    
+    // fourth
+    var div2 = document.querySelector("body").children[2];
+    div2.insertBefore(star, div2.lastElementChild);
+
+    // removeChild 
+    // doesn't require many variables, . syntax helps us traverse easily 
+    
+
+  </script>
+ </body>
+</html>

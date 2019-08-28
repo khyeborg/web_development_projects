@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Intro to JavaScript</title>
+		<meta charset="utf-8">
+
+		<style>
+			#fortune {
+				width: 180px;
+				height: 100px;
+				position: absolute;
+				top: 160px;
+				left: 75px;
+				text-align: center;
+				font-size: 300%;
+				/*background-color: #ccc;*/
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+		<h1>In Class Demo</h1>
+
+		<script>
+
+			console.log(window); // window is a pre-defined object
+			console.log(window.screen.availHeight);
+
+			var now = new Date();
+			console.log(now); // one pretty line
+			console.dir(now); // dig deep into an object
+
+			var hour = now.getHours();
+			var minute = now.getMinutes();
+
+			console.log(hour);
+			console.log(minute);
+
+			/*var pokemon = { name1: 'Pikachu', 
+			                age: 3, 
+			                powers: ['thunder', 'shock'],
+			                trainerHistory: {
+			                	trainer1: "Ash",
+			                	trainer2: "Craig"
+			                },
+			                sayHi: function() {
+			                	console.log("Hello!");
+			                	console.log(this.name1);
+			                	console.log(this.powers[1]);
+			                }
+			            };
+
+			console.log(pokemon);
+			console.log(pokemon['age']); // this is also important
+			console.log(pokemon.age);
+
+			console.log(pokemon.powers[1]);
+
+			pokemon.age = 10;
+			console.log(pokemon.age);
+			pokemon.bestFriend = "charmander";
+			console.log(pokemon.bestFriend);
+
+			delete pokemon.bestFriend;
+			console.log(pokemon.bestFriend);
+
+			console.log(pokemon.trainerHistory.trainer1);
+
+			pokemon.sayHi();
+
+			function foo(a) {
+				console.log(a.name1);
+			}
+
+			foo(pokemon);*/
+
+			/*var foo = function() {
+				console.log("hello");
+			}*/
+
+			/*var x = function() { // x does not have a specific name attached to it 
+				document.write("I'm anonymous");
+			}
+
+			x(); // calling x before it is defined will crash the program*/
+			
+			/*function fun1(a, b) { // named function - JavaScript scans your code to look for functions (hoisted) so calling a named function before defining it is fine
+				console.log("I'm in fun1!");
+				document.write(a + " and " + b);
+				document.write("<br>");
+				return a + b;
+			}
+
+			var answer = fun1(5, 7);
+			document.write("The answer is: " + answer);
+			document.write("<br>");
+
+			var q = fun1; // we are not calling the function, variable q is a pointer to the function fun1, q and fun1 are essentially the same thing
+			q(15, 17);*/
+
+		</script>
+
+		<!-- <img src="images/magic_8_ball_background.png">
+
+		<div id="fortune">
+
+			<script>
+				/*
+				var name = "Craig";
+				let name2 = "Khye"; // only available within the scope 
+
+				var pokemon = ["pikachu", "squirtle", "charmander"];
+				pokemon.push("foobar"); // add to end of array
+				console.log(pokemon);
+
+				pokemon.splice(0, 1); // where to remove, how many elements to remove
+				console.log(pokemon);
+
+				var newarray = [1, 2, 3, 4, 5];
+				newarray.splice(2, 0, "foobar"); // splice can be used to delete and also insert elements
+				console.log(newarray);
+				*/
+
+				// define our responses for our magic 8 ball
+				var responses = ["Yes", "No", "Maybe", "Ask Later", "Probably", "I don't care"];
+				var randomIndex = parseInt(Math.random() * responses.length); // Math.random picks a number between 0 and 1
+				// console.log(responses[randomIndex]);
+				document.write(responses[randomIndex]);
+
+			</script> 
+		</div> -->
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

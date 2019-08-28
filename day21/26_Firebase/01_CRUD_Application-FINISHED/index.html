@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Development</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      .hidden {
+        display: none;
+      }
+      .auth_button {
+        float: right;
+        margin-top: 10px;
+        padding: 3px;
+        font-size: 120%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Full Lifecycle CRUD Application</h1>
+
+    <p>"CRUD" stands for "Create, Read, Update and Delete" - it describes the basic functionality necessary in most user-driven applications.  This application is a demo "CRUD" application that lets the user do the following:</p>
+    <ul>
+      <li>Login and Logout (authentication)</li>
+      <li>Author and save notes (create)</li>
+      <li>View existing notes (read)</li>
+      <li>Remove existing notes (delete)</li>
+    </ul>
+
+    <hr>
+
+    <!-- authentication interface elements -->
+    <button id="login_button" class="auth_button">Login</button>
+    <button id="logout_button" class="hidden auth_button">Logout (<span></span>)</button>
+
+    <!-- user panel - only show when logged in  -->
+    <div id="user_panel" class="hidden">
+      <h2>Welcome, <span id="welcome"></span></h2>
+
+      <h3>Add New Note</h3>
+      <div id="add_note_panel">
+        Note: <input type="text" id="note"><button id="save_note">Save</button>
+      </div>
+
+      <h3>Existing Notes</h3>
+      <div id="existing_note_panel"></div>
+
+    </div>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <script>
+
+      $(document).ready(function()  {
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "",
+          authDomain: "",
+          databaseURL: "",
+          projectId: "",
+          storageBucket: "",
+          messagingSenderId: "",
+          appId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize a connection to  our database
+        var db = firebase.firestore();
+
+        // some DOM elements
+        login_button = document.getElementById('login_button');
+        logout_button = document.getElementById('logout_button');
+        user_panel = document.getElementById('user_panel');
+        welcome = document.getElementById('welcome');
+        note = document.getElementById('note');
+        save_note = document.getElementById('save_note');
+        existing_note_panel = document.getElementById('existing_note_panel');
+
+        // when the user clicks the login button we need to authenticate them
+        // we can do this by using Google's authentication API - this needs to be set up
+        // in the Firebase console under the 'Authentication' section of your project before you can use this feature
+        login_button.onclick = function(event) {
+
+          // setup a new authentication provider object
+          var provider = new firebase.auth.GoogleAuthProvider();
+          provider.setCustomParameters({
+            prompt: 'select_account'
+          });
+
+          // attempt authenticate
+          firebase.auth().signInWithPopup(provider);
+        } // end login button
+
+        // this function will trigger when the authentication state changes
+        // this could mean that the user:
+        // (a) logged in
+        // (b) logged out
+        // (c) is coming back to the page after being away from it, but their login cookie is still set
+        //     -- in this case, they should be logged in
+
+        // variable to hold onto the user's info
+        var user_info = false;
+
+        // variable to hold onto the event listener that will trigger when new notes are added for this user
+        var note_query_listener = false;
+
+        firebase.auth().onAuthStateChanged(function(user) {
+
+          // user is an object that contains info about the account that logged in
+          // it may be null, in which case they have logged out
+          // if it's not null that means that they are logged in
+          console.log(user);
+
+          // not null! they just logged in
+          if (user) {
+            // store their info in our 'user_info' variable which will allow other aspects of our application to access this user's info
+            user_info = user;
+
+            // hide the login button and show the logout button
+            login_button.classList.add('hidden');
+            logout_button.classList.remove('hidden');
+
+            // show the user panel
+            user_panel.classList.remove('hidden');
+
+            // display their e-mail address and name in the appropriate span tags
+            logout_button.firstElementChild.innerHTML = user_info.email;
+            welcome.innerHTML = user_info.displayName;
+
+            // set up an event listener for new data assocated with this user
+            // we can call this listener (as a function) to unsubscribe from changes when the user logs out
+            // NOTE: we are using an 'orderBy' modifier here to filter our results -- this requires that FireBase creates an 'index' on our data
+            // to do this open your console and look for an error message -  there will be a link here that will take you to the right spot in FireBase to set this up
+            note_query_listener = db.collection("notebook").where("email", "==", user_info.email).orderBy('time_stamp').onSnapshot(function(snapshot) {
+
+              console.log(snapshot);
+
+              // visit every document that was returned
+              for (var i = 0; i < snapshot.docs.length; i++) {
+
+                // the 'id' parameter of this object dictates its unique ID in firebase
+                // we can use that as a way to uniquely identify this item as an element on our page
+                let id = snapshot.docs[i].id;
+
+                // the 'data' parameter is an object that contains all of our fields
+                let data = snapshot.docs[i].data();
+
+                // see if we already know about this note
+                if (!document.getElementById( id )) {
+                  // create some HTML elements to render the note
+                  let temp = document.createElement('div');
+                  temp.id = id;
+
+                  // also add in a button to let the user delete this note
+                  let btn = document.createElement('button');
+                  btn.innerHTML = 'Delete';
+                  btn.dataset.noteId = id;
+                  temp.appendChild(btn);
+
+                  let span = document.createElement('span');
+                  span.innerHTML = data.note_message;
+                  temp.appendChild(span);
+
+                  existing_note_panel.appendChild(temp);
+
+                  // when the button is pressed it should trigger a deletion of this note
+                  btn.onclick = function(event) {
+                    db.collection("notebook").doc(event.currentTarget.dataset.noteId).delete();
+                    existing_note_panel.removeChild( event.currentTarget.parentElement );
+                  }
+                }
+              }
+
+            });
+
+          }
+
+          // null, they are logged out
+          else {
+            // unset the user_info variable
+            user_info = false;
+
+            // show the login button and hide the logout button
+            login_button.classList.remove('hidden');
+            logout_button.classList.add('hidden');
+
+            // hide the user panel
+            user_panel.classList.add('hidden');
+
+            // erase the custom span tags
+            logout_button.firstElementChild.innerHTML = '';
+            welcome.innerHTML = '';
+
+            // detach the event listener, if it exists
+            if (note_query_listener) {
+              note_query_listener();
+            }
+
+            // important: also delete all of the notes from the HTML interface
+            while (existing_note_panel.children.length >  0) {
+              existing_note_panel.removeChild( existing_note_panel.children[0] );
+            }
+          }
+
+        }); // end auth state change handler
+
+
+
+        // logout button
+        logout_button.onclick = function(event)  {
+          firebase.auth().signOut();
+        } // end logout button
+
+        // save a note - this allows the user to contribute a new note to their collection
+        save_note.onclick = function(event) {
+
+          // make sure that (a) they are logged in and (b) they typed in a note
+          if (user_info && note.value != '') {
+            // grab the current time
+            var now = new Date().getTime();
+
+            // construct a save request
+            db.collection("notebook").add({
+              note_message: note.value,
+              email: user_info.email,
+              time_stamp: now
+            })
+            .then(function(docRef) {
+              console.log("note saved");
+              console.log(docRef);
+
+              // clear the note input field
+              note.value = '';
+            });
+          }
+        } // end save new note
+
+      }); // end document ready
+
+    </script>
+
+  </body>
+
+
+
+
+
+
+
+
+</html>

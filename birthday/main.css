@@ -1,0 +1,411 @@
+
+body {
+	background-image: url("images/confetti3.gif");
+}
+
+div {
+	position: relative;
+}
+
+img {
+	position: relative;
+}
+
+.hidden {
+	display: none;
+}
+
+.absolute {
+	position: absolute;
+}
+
+#first {
+	margin: auto;
+	line-height: 1.5;
+	text-align: center;
+	color: white;
+	font-family: bookman; 
+	font-size: 300%;
+}
+
+#first_martin {
+	top: 151px;
+	left: 120px;
+}
+
+#first_hat {
+	top: 15px;
+	left: 195px;
+}
+
+#first_cake {
+	top: 660px;
+	left: 340px;
+}
+
+#first_balloons {
+	top: 0px;
+	left: 0px;
+}
+
+#first_banner {
+	top: -320px;
+	left: 380px;
+}
+
+#first_clickme {
+	top: 7px;
+	left: 267px;
+}
+
+#first_message {
+	background: rgba(251, 68, 54, 0.85);
+	padding: 25px;
+	border-radius: 10px;
+	width: 650px;
+	text-shadow: 2px 2px black;
+	top: 230px;
+	left: 450px;
+}
+
+#first_click {
+	color: white;
+	padding: 10px 16px;
+	border: none;
+	background: rgba(252, 147, 130, 0.85);
+	font-size: 15px;
+	border-radius: 8px;
+	font-weight: bold;
+	padding-bottom: 12px;
+	top: 365px;
+	left: 915px;
+	width: 225px;
+}
+
+#first_love {
+	position: relative;
+	top: 3px;
+}
+
+.second {
+	margin: auto;
+	text-align: center;
+	background: rgba(251, 68, 54, 0.8);
+	color: white;
+	border-radius: 8px;
+}	
+
+#second_title {
+	top: 20px;
+	font-size: 280%;
+	width: 600px;
+	padding: 12px 15px;
+	border-radius: 8px;
+}
+
+#second_sub {
+	width: 970px;
+	font-size: 120%;
+	top: 50px;
+	text-align: left;
+	padding: 35px 30px;
+	padding-bottom: 60px;
+}
+
+#second_words {
+	left: 80px;
+}
+
+#second_words p {
+	margin-top: 17px;
+	margin-bottom: 1px;
+}
+
+input {
+	width: 20%;
+	padding: 2px 2px;
+	box-sizing: border-box;
+	border-radius: 4px;
+}
+
+.checkmark {
+	position: relative;
+	top: 5px;
+	width: 16px;
+}
+
+.crossmark {
+	position: relative;
+	top: 5px;
+	width: 16px;
+}
+
+#second_martin {
+	top: 77px;
+	left: 685px;
+	border: 3px solid #FC9382;
+}
+
+#second_congrats {
+	top: 326px;
+	left: 160px;
+	font-size: 150%;
+}
+
+#second_click {
+	padding: 10px 16px;
+	border: none;
+	background: rgba(252, 147, 130, 0.8);
+	color: white;
+	font-size: 15px;
+	border-radius: 8px;
+	font-weight: bold;
+	padding-bottom: 12px;
+	width: 225px;
+	top: 335px;
+	left: 675px;
+}
+
+#second_love {
+	position: relative;
+	top: 2px;
+}
+
+#second_textbox {
+	top: 0px;
+	left: 825px;
+}
+
+#second_thatsme {
+	top: 42px;
+	left: 832px;
+}
+
+.third {
+	margin: auto;
+	text-align: center;
+	color: white;
+	border-radius: 8px;
+    width: 800px;
+    height: 500px;
+}
+
+#sketch1 {
+	top: 25px;
+	margin: auto;
+	position: relative;
+    width: 800px;
+    height: 500px;
+    border: none;
+}
+
+#third_click {
+	color: white;
+	padding: 10px 16px;
+	border: none;
+	background: rgba(252, 147, 130, 0.85);
+	font-size: 15px;
+	border-radius: 8px;
+	font-weight: bold;
+	padding-bottom: 12px;
+	/*top: 535px;
+	left: 805px;*/
+	bottom: -55px;
+	left: 5px;
+	width: 225px;
+}
+
+#third_love {
+	position: relative;
+	top: 2px;
+}
+
+.fourth {
+	margin: auto;
+	text-align: center;
+	color: white;
+	border-radius: 8px;
+    width: 850px;
+    height: 500px;
+}
+
+#sketch2 {
+	top: 25px;
+	margin: auto;
+	position: relative;
+    width: 850px;
+    height: 500px;
+    border: none;
+}
+
+#fourth_click {
+	color: white;
+	padding: 10px 16px;
+	border: none;
+	background: rgba(0, 0, 0, 0.8);
+	color: rgba(255, 255, 255, 0.8);;
+	font-size: 15px;
+	border-radius: 8px;
+	font-weight: bold;
+	padding-bottom: 12px;
+	bottom: -55px;
+	right: 5px;
+	text-align: left;
+	width: 201px;
+	border: 0.5px solid white;
+	border-top: 0px;
+	border-right: 0px;
+}
+
+#fifth {
+
+}
+
+#header {
+	background-color: black;
+	color: white;
+	font-size: 220%;
+	padding: 20px 20px;
+}
+
+#message {
+	margin: 110px;
+	font-size: 100%;
+	text-align: justify;
+	line-height: 1.25;
+	margin-top: 70px;
+	margin-bottom: 160px;
+	/*border: 1px solid black;*/
+}
+
+#message_pic {
+	position: relative;
+	top: 40px;
+	left: 110px;
+	border: 2px solid black;
+}
+
+#fifth_temp {
+	position: relative;
+	margin: 110px;
+	font-size: 150%;
+	text-align: justify;
+	line-height: 1.25;
+	margin-top: 70px;
+	margin-bottom: 160px;
+}
+
+.emoji {
+	position: relative;
+	top: 3px;
+	width: 18px;
+}
+
+#extra_emoji {
+	position: relative;
+	top: 8px;
+	width: 40px;
+}
+
+#fifth_click {
+	position: absolute;
+	color: white;
+	padding: 10px 16px;
+	border: none;
+	background: rgba(0, 0, 0, 0.85);
+	font-size: 15px;
+	border-radius: 8px;
+	font-weight: bold;
+	padding-bottom: 12px;
+	bottom: -85px;
+	right: 120px;
+	width: 227px;
+}
+
+#float_paragraph {
+	float: left;
+}
+
+#fifth_love {
+	position: relative;
+	top: 3px;
+}
+
+#sixth_password {
+	margin: auto;
+	background-color: gray;
+	color: white;
+	padding: 30px;
+	border-radius: 10px;
+	width: 650px;
+	top: 120px;
+	padding-top: 15px;
+	padding-bottom: 35px;
+	font-size: 130%;
+}
+
+#sixth_present_div {
+	margin: auto;
+	text-align: center;
+}
+
+#sixth_present {
+	margin: auto;
+	position: relative;
+	top: 120px;
+	left: 50px;
+	/*border: 10px solid black;*/
+}
+
+#sixth_statement {
+	background: rgba(251, 68, 54, 0.85);
+	text-align: left;
+	color: white;
+	padding: 20px;
+	border-radius: 10px;
+	width: 300px;
+	top: 70px;
+	left: 300px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 150%;
+	border: 2px solid white;
+}
+
+#sixth_statement_extra {
+	background: rgba(251, 68, 54, 0.85);
+	text-align: left;
+	color: white;
+	padding: 30px;
+	border-radius: 10px;
+	width: 720px;
+	top: 120px;
+	padding-top: 25px;
+	padding-bottom: 35px;
+	font-size: 120%;
+	border: 2px solid white;
+	line-height: 1.5;
+}
+
+#sixth_spaces {
+	top: 190px;
+	height: 10px;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+

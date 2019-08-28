@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Intro to the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+			/*#foo {
+				background-color: pink;
+				font-family: fantasy;
+			}
+
+			#bar a {
+
+			}*/
+
+			div {
+				width: 100px;
+				height: 100px;
+				border: 1px solid black;
+				margin-bottom: 25px;
+			}
+
+			#foo {
+				background-color: blue;
+				display: none; 
+			}
+
+			#bar {
+				background-color: orange;
+				display: none; /*they are on the page, they are just not drawn. display: block; brings it back*/
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<button id="b1">Button 1</button>
+		<button id="b2">Button 2</button>
+
+		<div id="foo"></div>
+		<div id="bar"></div>
+
+		<!-- <div id="box1" onclick="alert('hello');"> commingling JavaScript with HTML
+			This is box - 1
+		</div>
+
+		<div id="box2">
+			This is box - 2
+		</div>
+
+		<div id="box3">
+			This is box - 3
+		</div> -->
+
+		<!-- <h1 id="header">Welcome to class</h1>
+
+		<div id="foo">
+			Hello, welcome to my site.
+		</div>
+
+		<div id="bar">
+			<a href="#">About</a> place holder for a nothing link
+			<a href="#">Contact</a>
+			<a href="#">Pricing</a> 
+		</div>
+
+		<div class="pikachu">
+			Pikachu div
+		</div>
+
+		<div class="pikachu">
+			Pikachu II div
+		</div>
+
+		<div id="one">
+			one
+		</div>
+
+		<div id="two">
+			<ul>
+				<li>A</li>
+				<li>B</li>
+			</ul>
+		</div>
+
+		<div id="three">
+			<div>
+				Blah
+			</div>
+		</div> -->
+
+		<script>
+
+			var b1 = document.getElementById("b1");
+
+			// have b1 listen for mouse clicks
+			b1.onclick = function() {
+				var foo = document.querySelector("#foo");
+
+				if (foo.style.display == "block") {
+					foo.style.display = "none";
+				}
+				else {
+					foo.style.display = "block";
+				}
+			}
+
+			var b2 = document.getElementById("b2");
+
+			// have b2 listen for mouse clicks
+			b2.onclick = function() {
+				var bar = document.querySelector("#bar");
+				var allStyles = window.getComputedStyle(bar); 
+
+				console.log(bar.style.display); // ONLY shows inline styles
+				console.log(allStyles.display); // shows ALL styles
+
+				if (allStyles.display == "none") {
+					bar.style.display = "block";
+				}
+				else {
+					bar.style.display = "none";
+				}
+			}
+
+			/* var colors = ["red", "blue", "green", "yellow", "orange"];
+
+			// every time the use clicks on box2, we pop an alert 
+			var b2 = document.querySelector('#box2');
+			var b3 = document.querySelector('#box3');
+
+			// bing an event to box 2
+			b2.onclick = function() {
+				alert("You clicked on box 2!");
+				var i = parseInt(Math.random() * colors.length);
+				b2.style["background-color"] = colors[i];
+			}
+
+			b3.onmouseover = function() {
+				var j = parseInt(Math.random() * colors.length);
+				b3.style["background-color"] = colors[j];
+			} */
+
+			/*var one = document.querySelector("#one");
+			//var one = document.getElementById("one");
+			//var one = document.querySelector("div");
+
+			one.style.color = "orange";
+			one.innerHTML = "Hello, world!";
+			one.style["font-size"] = "200%";
+
+			var firstListItem = document.querySelector("#two ul li");
+			//var firstListItem = document.querySelector("li");
+			firstListItem.innerHTML = "Pikachu";
+			*/
+
+			/*
+			var element1 = document.getElementById('header');
+			element1.style.color = "red";
+
+			var element2 = document.getElementById("foo");
+			element2.style.color = "yellow";
+			element2.style["background-color"] = "black"; // the same 
+			element2.style.backgroundColor = "black"; // the same 
+
+			document.getElementById("foo").style.color = "yellow";
+
+			// querySelector only finds the first one on the page 
+			var element3 = document.querySelector(".pikachu"); // pull ONE element from the page, the FIRST element
+			var element4 = document.querySelector("#foo"); // get ID 
+
+			element3.style.color = "orange";
+			element3.style["font-size"] = "200%";
+			// change the text within a div 
+			element3.innerHTML = "I just hacked the Pikachu div!";
+
+			var firstA = document.querySelector("#bar a");
+			firstA.style["background-color"] = "blue";
+			firstA.href= "http://www.google.com";
+			firstA.innerHTML = "Click here for google";
+
+			// img.src = "images/new_image.jpg"
+
+			// JavaScript rules win CSS
+			// script always goes at the end of th body tag 
+			*/
+
+			/*
+			// window.innerHeight
+			// window.document - shows html 
+
+			// somehow find a reference to the h1 tag 
+			//document.childNodes.
+			// ask the browser to find the h1 tag for us inside of the document object
+			var element1 = document.getElementById('header'); // returns a link to the element that satisfies the condition
+			console.log(element1);
+			console.dir(element1); // shows it to me as a JavaScript object
+
+			// dom query 
+			var choice = parseInt(Math.random() * 3);
+			if (choice == 0) {
+				element1.style.color = "red"; // using JavaScript to go into the dom to change the style of the element
+			}
+
+			else if (choice == 1) {
+				element1.style.color = "orange";
+			}
+			else {
+				element1.style.color = "blue";
+			}
+			*/
+
+			/*var foo = {
+				a: 1,
+				b: 2,
+				c: {
+					q: 5,
+					r: {
+						x: 9
+					}
+				}
+			};
+
+			console.log(foo.c.r.x);
+			// console.dir(document) - shows ALL properties 
+			// document and window.document are the same*/
+			
+		</script>
+
+		<!-- <div id="whatever"> script tag CANNOT reach here 
+		</div> -->
+
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>In class Day 3</title>
+
+		<!--<style>
+		div {
+			width: 100px;
+			height: 100px;
+			background-color: #ccc;
+		}
+
+		#four {
+			margin: auto;
+		}
+
+		#two {
+			border: 5px solid black;
+			box-sizing: border-box; /*make sure the box is the same size after adding border*/
+		}
+
+		#one {
+			/*position: static;*/ /*everything is statically positioned (static, relative, absolute, fixed positioning*/
+			/*position: relative;*/ /*reserves the space where the box was supposed to be*/
+			position: absolute; /*remove it from normal flow, everything else rushes in to take its place. Absolute positioning is relative to its PARENT tag*/
+			left: 0px;
+			top: 0px;
+			z-index: 5; /*higher priority, closer to the user*/
+		}
+
+		/*#zero {
+			position: absolute;
+			left: 25px;
+			top: 25px;
+			background-color: #ffcc00;
+			z-index: 2;
+		}*/
+
+		#zero {
+			position: fixed; /*the box will stay there forever even when the browser gets bigger or smaller (fixed within a browser)*/
+			right: 0px;
+			top: 0px;
+			background-color: #ffcc00;
+		}
+
+		#container {
+			width: 300px;
+			height: 300px;
+			position: relative; /*forces container to know where it lives on the screen*/
+		}
+
+		#a {
+			background-color: green;
+		}
+
+		#b {
+			background-color: orange;
+			position: absolute;
+			right: 0px;
+			top: 0px;
+		}
+
+		.blue {
+			background-color: aqua;
+			border: 1px solid black;
+		}
+
+		#x {
+			float: left; /*float is for responsive design*/ /*media queries*/ 
+		}
+
+		#y {
+			float: left;
+		}
+
+		#z {
+			clear: both; /*stops floating*/ 
+		}
+
+		</style>-->
+
+		<style>
+			body {
+				margin: 0px;
+			}
+
+			#header {
+				background-color: black;
+				color: white;
+				font-size: 300%;
+			}
+
+			#footer {
+				background-color: black;
+				color: white;
+				font-size: 200%;
+				text-align: center;
+			}
+
+			.element {
+					border: 1px solid black;
+					float: left;
+					box-sizing: border-box;
+				}
+
+			@media screen and (min-width: 961px) { /*a lot of screen real estate*/
+				.element {
+					width: 25%;
+				}
+			}
+
+			@media screen and (max-width: 960px) { 
+				.element {
+					width: 50%;
+				}
+			}
+
+			
+
+		</style>
+
+	</head>
+
+	<body>
+		<!--<h1>In Class</h1>
+
+		<div id="four">4</div>
+		<div id="two">2</div>
+		<div id="three">3</div>
+		<div id="one">1</div>
+		<div id="zero">0</div>
+
+		<div id="container">
+			<div id="a">A</div>
+			<div id="b">B</div>
+		</div>
+
+		<div id="x" class="blue">X</div>
+		<div id="y" class="blue">Y</div>
+		<div id="z" class="blue">Z</div>
+		<div id="q" class="blue">Q</div>-->
+
+		<div id="header">Header</div>
+
+		<div id="container">
+			<div id="one" class="element">One</div>
+			<div id="two" class="element">Two</div>
+			<div id="three" class="element">Three</div>
+			<div id="four" class="element">Four</div>
+			<br style="clear: both;">
+		</div>
+
+		<div id="footer">Footer</div>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYU Web Development</title>
+  </head>
+  <body>
+    <h1>NYU Web Development</h1>
+
+    <button id="btn">Click Me!</button>
+    <div id="results"></div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+
+      $(document).ready(function() {
+
+        $("#btn").click(function(event) {
+
+          // initiate an AJAX request to 'datasource2' and send the
+          // following variables (encapsulated in an object)
+          $.ajax({
+                    type: 'POST',
+                    url: 'datasource2.php',
+                    data: {
+                            name: 'squirtle',
+                            type: 'water'
+                          },
+                    success: function(data, status) {
+                              console.log("Successful AJAX request");
+                              console.log("Data: " + data)
+                              console.log("Status: " + status);
+                            },
+                    error: function(request, data, status) {
+                              console.log("An error occurred"),
+                              console.log("Status:" + status);
+                            }
+                  });
+
+        }); // end button click
+
+      }); // end document ready
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+
+		.hidden {
+			display: none;
+		}
+
+		</style>
+
+	</head>
+
+	<body>
+		<h1>Hello</h1>
+		<div id="foo">
+			<p>1</p>
+			<p>2</p>
+			<p>1</p>
+			<p>2</p>
+			<p>1</p>
+			<p>2</p>
+			<p>1</p>
+			<p>2</p>
+			<p>1</p>
+			<p>2</p>
+			<p>1</p>
+			<p>2</p>
+			<p>1</p>
+			<p>2</p>
+		</div>
+		<div id="bar">Bar</div>
+
+		<script>
+
+			//console.log(document.querySelector("h1").parentElement); // ask for h1's parent
+			//var h1 = document.querySelector("h1");
+			//h1.parentElement.style.backgroundColor = "orange";
+
+			/*
+			var p = document.querySelector("p");
+			p.parentElement.parentElement.style.backgroundColor = "green"; // find p's parent and then find p's parent's parent
+			p.nextElementSibling.style.backgroundColor = "pink";
+			// previousElementSibling or nextElementSibling can be null
+			*/
+
+			/*
+			var h1 = document.querySelector("h1");
+			h1.nextElementSibling.nextElementSibling.style.backgroundColor = "yellow";
+			*/
+
+			/*
+			// elements keep track of their children: first child, last child, and everything in between
+			var body = document.querySelector("body");
+			body.firstElementChild.style.backgroundColor = "yellow";
+			body.lastElementChild.previousElementSibling.style.backgroundColor = "yellow";
+			//console.dir(body)
+			*/
+
+			// appendChild always adds child to the end
+
+			/* function foo(a) {
+				console.log(a);
+			}
+
+			foo(5);
+
+			var el = document.querySelector("p");
+
+			el.onclick = function(event) {
+				console.log(event);
+				console.log(event.currentTarget); // gives you the tag that triggered this event???
+				event.currentTarget.style.backgroundColor = "orange";
+			} */
+
+			var el2 = document.querySelectorAll("p");
+			for (var i = 0; i < el2.length; i++) {
+				el2[i].onclick = function(event) {
+					event.currentTarget.style.backgroundColor = "orange";
+				}
+			}
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

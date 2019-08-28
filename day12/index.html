@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with the DOM</title>
+		<meta charset="utf-8">
+
+		<style>
+			.hidden {
+				display: none;
+			}
+			
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<h1>Day 14</h1>
+
+		<!-- <div id="account"></div>
+		<button id="add">Add $</button>
+		<button id="sub">Sub $</button> -->
+
+		<form>
+			<select id="color">
+				<option value="">Select a color</option>
+				<option value="yellow">Yellow</option>
+				<option value="blue">Blue</option>
+				<option value="pink">Pink</option>
+			</select>
+		</form>
+
+
+		<script>
+
+			// let's make a web page that is sticky
+			// when the page loads, we need to examine the bookie and see if we have a 'prevColor entry'
+			var s = document.cookie.split("; ");
+			console.log(s);
+			var allCookies = {};
+			for (var i = 0; i < s.length; i++) {
+				var q = s[i].split("=");
+				allCookies[q[0]] = q[1];
+			}
+			console.log(allCookies);
+			if (allCookies['prevColor'] !== undefined) {
+				document.querySelector('body').style.backgroundColor = allCookies['prevColor'];
+
+				var prevOption = document.createElement('option');
+				prevOption.value = allCookies['prevColor'];
+				prevOption.innerHTML = allCookies['prevColor'];
+				prevOption.selected = true;
+				document.querySelector('#color').appendChild(prevOption);
+
+			}
+
+			// whenever the drop down changes, update the background color of the page
+			document.querySelector('#color').onchange = function() {
+				// get the color
+				document.querySelector("body").style.backgroundColor = this.value;
+
+				// set a cookie to remember the color choice
+				document.cookie = "prevColor=" + this.value;
+				console.log(document.cookie);
+			}
+			
+
+
+			/*
+			// document.cookie = 'pokemon=pikachu'; // name of cookie equals value
+			document.cookie = 'name=craig'; // cookie for this page is not overwritten, it is concatenated
+
+			// cookies will only work when we access it with a server 
+			console.log(document.cookie); // machine-specific, cookies can still be accessed after it is turned off
+			*/
+
+			/* (function() {
+
+				var bank = 50;
+				var account = document.getElementById("account");
+				account.innerHTML = bank;
+
+				document.getElementById("add").onclick = function(event) {
+					bank += 10;
+					account.innerHTML = bank;
+				}
+
+				document.getElementById("sub").onclick = function(event) {
+					bank -= 10;
+					account.innerHTML = bank;
+				}
+			})(); // packages the function and calls the function immediately - a self-calling functions, forces all the variables to be local variables, prevents tempering
+			*/
+			
+
+
+			/*function counter() {
+				var a = 0;
+
+				function increase() {
+					a += 1;
+					console.log("a is now: ", a);
+				}
+
+				return increase;
+			}
+
+			var x = counter();
+			x();*/
+
+			/* function fun1() {
+				var a = 5;
+				console.log("in fun1:", a);
+
+				function bar() {
+					console.log("I am the bar function!", a);
+				}
+
+				bar();
+			}
+
+			fun1();
+			console.log("outside", a); // does not work, variable is out of scope
+			bar(); // does not work, function is out of scope*/
+
+		</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

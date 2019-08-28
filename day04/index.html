@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Intro to JavaScript</title>
+		<meta charset="utf-8">
+
+		<style>
+			#foo {
+				width: 100px;
+				height: 100px;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+		<h1>Introduction to JavaScript</h1>
+		<!-- <h2>this is a h2 tag</h2> -->
+
+		<script>
+			/*document.write("Hello, world");
+			console.log("This is a secret!");
+
+			var a = true;
+			console.log(a, typeof(a));
+
+			var b = parseInt(prompt("What is your fav number?"));
+			console.log(b, typeof(b));
+
+			var c = b.toString();
+			console.log(c, typeof(c));
+
+			var c = "" + a;
+			console.log(c, typeof(c));*/
+
+			/*// ask for a name
+			var name = prompt("Enter your name: ");
+
+			// generate a tag for the page with their name in it
+			var tag1 = "<h1>Welcome, " + name + "</h1>";
+			document.write(tag1);
+
+			// ask for a color
+			var colorCode = prompt("Enter a color code: ");
+
+			// generate a tag for the page with their color
+			var tag2 = '<div id="foo" style="background-color: ' + colorCode + ';">Your Color</div>';
+			document.write(tag2);*/
+
+			/*var r = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var g = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var b = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+
+			var r2 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var g2 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var b2 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+
+			var r3 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var g3 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var b3 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+
+			var r4 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var g4 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+			var b4 = parseInt(Math.random() * 256); // generates an integer from 0 to 255
+
+
+			var tag = '<div style="background-color: rgb(' + r + ',' + g + ',' + b + ');">Blah</div>';
+			document.write(tag);
+			var tag2 = '<div style="background-color: rgb(' + r2 + ',' + g2 + ',' + b2 + ');">Blah</div>';
+			document.write(tag2);
+			var tag3 = '<div style="background-color: rgb(' + r3 + ',' + g3 + ',' + b3 + ');">Blah</div>';
+			document.write(tag3);
+			var tag4 = '<div style="background-color: rgb(' + r4 + ',' + g4 + ',' + b4 + ');">Blah</div>';
+			document.write(tag4);
+			var tag5 = '<div style="background-color: rgb(' + r5 + ',' + g5 + ',' + b5 + ');">Blah</div>';
+			document.write(tag5);*/
+
+			/*var a = 5;
+
+			if (a > 1) {
+				document.write("a is bigger than 1!<br>");
+			}
+
+			// == : does not check data type, 5 and "5", === : checks the data type 
+
+			var c = 0;
+
+			while (c < 100) {
+				document.write("<p>" + c + "</p>");
+				// c += 1;
+				c++;
+			}*/
+
+			for (let i = 0; i < 100; i++) { // variable i no longer exist outside of the for loop
+				document.write('<p>' + i + '</p');
+			}
+
+			var names = ['pikachu', 'squirtle', 'charmander'];
+			console.log(names);
+			names.push('chansey');
+			console.log(names.length);
+
+
+			for (var i = 0; i < names.length; i++) {
+				console.log(i, names[i]);
+			}
+		</script>
+		
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
